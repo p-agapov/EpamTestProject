@@ -35,7 +35,7 @@ public class Connector {
     @SneakyThrows
     private void init() {
         @Cleanup val connection = DriverManager.getConnection(DB_URL);
-        val statement = connection.createStatement();
+        @Cleanup val statement = connection.createStatement();
         statement.executeUpdate(CREATE_USERS_SQL);
         statement.executeUpdate(CREATE_TOURS_SQL);
         statement.executeUpdate(CREATE_CUSTOMERS_SQL);
