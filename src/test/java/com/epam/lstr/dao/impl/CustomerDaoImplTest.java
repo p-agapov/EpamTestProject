@@ -1,7 +1,7 @@
 package com.epam.lstr.dao.impl;
 
 import com.epam.lstr.dao.CustomerDao;
-import com.epam.lstr.dao.model.Customer;
+import com.epam.lstr.model.Customer;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.junit.jupiter.api.DisplayName;

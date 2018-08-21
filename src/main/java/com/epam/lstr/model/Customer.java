@@ -1,4 +1,4 @@
-package com.epam.lstr.dao.model;
+package com.epam.lstr.model;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
