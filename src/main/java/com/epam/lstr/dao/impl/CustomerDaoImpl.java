@@ -2,7 +2,7 @@ package com.epam.lstr.dao.impl;
 
 import com.epam.lstr.dao.Connector;
 import com.epam.lstr.dao.CustomerDao;
-import com.epam.lstr.dao.model.Customer;
+import com.epam.lstr.model.Customer;
 import lombok.Cleanup;
 import lombok.NonNull;
 import lombok.SneakyThrows;
