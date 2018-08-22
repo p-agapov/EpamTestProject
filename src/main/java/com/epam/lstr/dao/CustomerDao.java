@@ -1,6 +1,6 @@
 package com.epam.lstr.dao;
 
-import com.epam.lstr.dao.model.Customer;
+import com.epam.lstr.model.Customer;
 
 import java.util.List;
 
