@@ -10,12 +10,12 @@ import java.util.Random;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-class TourDaoImplTest {
+public class TourDaoImplTest {
 
     private static TourDao tourDao;
     private static Tour tour;
 
-    static private Tour randomTour() {
+    static public Tour randomTour() {
         Random random = new Random();
         String name = String.valueOf(Math.abs(random.nextInt()));
         int price = Math.abs(random.nextInt());
