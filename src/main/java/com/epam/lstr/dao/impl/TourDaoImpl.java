@@ -15,7 +15,7 @@ import static java.sql.Statement.RETURN_GENERATED_KEYS;
 
 public class TourDaoImpl implements TourDao {
 
-    private Connector connector = Connector.getConnector();
+    private Connector connector;
 
     private static final String INSERT_SQL = "INSERT INTO tours (name, price, hot, discount) VALUES (?, ?, ?, ?)";
     private static final String GET_ALL_SQL = "SELECT tour_id, name, price, hot, discount FROM tours";
@@ -30,6 +30,10 @@ public class TourDaoImpl implements TourDao {
     private static final String PRICE_FIELD = "price";
     private static final String HOT_FIELD = "hot";
     private static final String DISCOUNT_FIELD = "discount";
+
+    public TourDaoImpl() {
+        connector = Connector.getConnector();
+    }
 
     @SneakyThrows
     public Tour add(@NonNull Tour tour) {

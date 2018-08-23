@@ -8,12 +8,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class Connector {
+
+    private static final String JDBC_DRIVER = "org.h2.Driver";
     private static final String DB_URL = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1";
 
-    private static final String CREATE_USERS_SQL = "CREATE TABLE users (user_id IDENTITY, login varchar not null, password varchar, role enum('manager','customer'))";
-    private static final String CREATE_TOURS_SQL = "CREATE TABLE tours (tour_id IDENTITY, name varchar, price int, hot boolean, discount int)";
-    private static final String CREATE_ORDERS_SQL = "CREATE TABLE orders (order_id IDENTITY, customer_id int, tour_id int, paid boolean)";
-    private static final String CREATE_CUSTOMERS_SQL = "CREATE TABLE customers (customer_id IDENTITY, name varchar, surname varchar, vip boolean, user_id int)";
+    private static final String CREATE_USERS_SQL = "CREATE TABLE IF NOT EXISTS users (user_id IDENTITY, login varchar not null, password varchar, role enum('manager','customer'))";
+    private static final String CREATE_TOURS_SQL = "CREATE TABLE IF NOT EXISTS tours (tour_id IDENTITY, name varchar, price int, hot boolean, discount int)";
+    private static final String CREATE_ORDERS_SQL = "CREATE TABLE IF NOT EXISTS orders (order_id IDENTITY, customer_id int, tour_id int, paid boolean)";
+    private static final String CREATE_CUSTOMERS_SQL = "CREATE TABLE IF NOT EXISTS customers (customer_id IDENTITY, name varchar, surname varchar, vip boolean, user_id int)";
 
     private static Connector connector;
 
@@ -34,6 +36,7 @@ public class Connector {
 
     @SneakyThrows
     private void init() {
+        Class.forName(JDBC_DRIVER).newInstance();
         @Cleanup val connection = DriverManager.getConnection(DB_URL);
         @Cleanup val statement = connection.createStatement();
         statement.executeUpdate(CREATE_USERS_SQL);
