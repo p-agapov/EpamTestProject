@@ -25,7 +25,7 @@
                     <input type="hidden" name="id" value="${tour.getTourId()}">
                     <input type="hidden" name="name" value="${tour.getName()}">
                     <input type="hidden" name="price" value="${tour.getPrice()}">
-                    <input type="hidden" name="hot" value="${tour.isHot()}">
+                    <input type="hidden" name="hot" value="${tour.isHot()?"on":"off"}">
                     <input type="hidden" name="discount" value="${tour.getDiscount()}">
                     <input type="submit" value="Change" style="float:left">
                 </form>
