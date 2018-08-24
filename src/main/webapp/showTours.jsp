@@ -20,17 +20,21 @@
             <td>${tour.getPrice()}</td>
             <td>${tour.isHot()}</td>
             <td>${tour.getDiscount()}</td>
-                <%--<td>--%>
-                <%--<form action = "updateUser.jsp" method="post">--%>
-                <%--<input type="hidden" name="id" value="${user.getId()}">--%>
-                <%--<input type="hidden" name="name" value="${user.getName()}">--%>
-                <%--<input type="hidden" name="age" value="${user.getAge()}">--%>
-                <%--<input type="submit" value="Изменить" style="float:left">--%>
-                <%--</form>--%>
-                <%--<form action="deleteUser.jsp" method="post">--%>
-                <%--<input type="hidden" name="id" value="${user.getId()}">--%>
-                <%--<input type="submit" value="Удалить" style="float:left">--%>
-                <%--</form></td>--%>
+            <td>
+                <form action="updateTour.jsp" method="post">
+                    <input type="hidden" name="id" value="${tour.getTourId()}">
+                    <input type="hidden" name="name" value="${tour.getName()}">
+                    <input type="hidden" name="price" value="${tour.getPrice()}">
+                    <input type="hidden" name="hot" value="${tour.isHot()}">
+                    <input type="hidden" name="discount" value="${tour.getDiscount()}">
+                    <input type="submit" value="Change" style="float:left">
+                </form>
+                <form action="/tours" method="post">
+                    <input type="hidden" name="method" value="delete"/>
+                    <input type="hidden" name="id" value="${tour.getTourId()}">
+                    <input type="submit" value="Удалить" style="float:left">
+                </form>
+            </td>
         </tr>
     </c:forEach>
 </table>

@@ -92,7 +92,7 @@ public class TourController extends HttpServlet {
 
     }
 
-    private void set(HttpServletRequest req, HttpServletResponse resp) {
+    private void set(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
         int id = Integer.parseInt(req.getParameter("id"));
         String name = req.getParameter("name");
@@ -102,6 +102,8 @@ public class TourController extends HttpServlet {
         Tour tour = new Tour(id, name, price, isHot, discount);
 
         service.set(tour);
+
+        getAll(req, resp);
     }
 
     private void delete(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
