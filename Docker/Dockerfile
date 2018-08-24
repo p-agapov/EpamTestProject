@@ -7,7 +7,7 @@ RUN apt-get update && apt-get -y upgrade
 WORKDIR /usr/local/tomcat
 
 
-COPY studentproject.war /usr/local/tomcat/webapps/app.war
+COPY 180813-studentproject-1.0-SNAPSHOT.war /usr/local/tomcat/webapps/app.war
 
 EXPOSE 8080
 
