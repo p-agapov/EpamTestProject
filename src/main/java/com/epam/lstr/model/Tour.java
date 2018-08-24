@@ -20,4 +20,8 @@ public class Tour {
         this.isHot = isHot;
         this.discount = discount;
     }
+
+    public Tour(int id) {
+        this.tourId = id;
+    }
 }

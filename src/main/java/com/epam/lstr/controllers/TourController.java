@@ -104,21 +104,21 @@ public class TourController extends HttpServlet {
         service.set(tour);
     }
 
-    private void delete(HttpServletRequest req, HttpServletResponse resp) {
+    private void delete(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
         int id = Integer.parseInt(req.getParameter("id"));
-        String name = req.getParameter("name");
-        int price = Integer.parseInt(req.getParameter("price"));
-        boolean isHot = Integer.valueOf(req.getParameter("hot")) == 1;
-        int discount = Integer.parseInt(req.getParameter("discount"));
-        Tour tour = new Tour(id, name, price, isHot, discount);
 
+        Tour tour = new Tour(id);
         service.delete(tour);
+
+        getAll(req, resp);
     }
 
-    private void deleteAll(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    private void deleteAll(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
         service.deleteAll();
+
+        getAll(req, resp);
 
     }
 
