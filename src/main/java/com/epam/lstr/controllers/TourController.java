@@ -82,7 +82,7 @@ public class TourController extends HttpServlet {
 
         String name = req.getParameter("name");
         int price = Integer.parseInt(req.getParameter("price"));
-        boolean isHot = req.getParameter("hot").equals("on");
+        boolean isHot = req.getParameter("hot") != null;
         int discount = Integer.parseInt(req.getParameter("discount"));
         Tour tour = new Tour(name, price, isHot, discount);
 
@@ -97,7 +97,7 @@ public class TourController extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         String name = req.getParameter("name");
         int price = Integer.parseInt(req.getParameter("price"));
-        boolean isHot = req.getParameter("hot").equals("on");
+        boolean isHot = req.getParameter("hot") != null;
         int discount = Integer.parseInt(req.getParameter("discount"));
         Tour tour = new Tour(id, name, price, isHot, discount);
 
