@@ -4,11 +4,10 @@ import com.epam.lstr.dao.CustomerDao;
 import com.epam.lstr.dao.impl.CustomerDaoImpl;
 import com.epam.lstr.model.Customer;
 import com.epam.lstr.services.CustomerService;
+import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 
 import java.util.Collection;
-
-import static lombok.AccessLevel.PRIVATE;
 
 /**
  * Implementation of CustomerDao interface
@@ -17,7 +16,7 @@ import static lombok.AccessLevel.PRIVATE;
  * @version 1.0
  */
 
-@FieldDefaults(level = PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class CustomerServiceImpl implements CustomerService {
 
     CustomerDao dao;
