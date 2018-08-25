@@ -42,5 +42,10 @@
 <form action="addTour.jsp">
     <input type="submit" value="Add new tour">
 </form>
+
+<form action="/tours" method="post">
+    <input type="hidden" name="method" value="deleteAll">
+    <input type="submit" value="Delete all tours">
+</form>
 </body>
 </html>
