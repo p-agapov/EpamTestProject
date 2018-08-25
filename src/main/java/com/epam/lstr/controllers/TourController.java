@@ -11,33 +11,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 
 @WebServlet("/tours")
 public class TourController extends HttpServlet {
 
-    private TourService service = new TourServiceImpl();
+    private final TourService service = new TourServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        switch (req.getParameter("method")) {
-            case "get":
-                get(req, resp);
-                break;
-            case "getAll":
-                getAll(req, resp);
-                break;
-            case "count":
-                count(req, resp);
-                break;
-            default:
-                getAll(req, resp);
+        String param = req.getParameter("method");
+        if (param != null) {
+            switch (param) {
+                case "get":
+                    get(req, resp);
+                    break;
+                case "getAll":
+                    getAll(req, resp);
+                    break;
+                default:
+                    getAll(req, resp);
 
-        }
-
+            }
+        } else
+            getAll(req, resp);
     }
 
     @Override
@@ -59,22 +58,23 @@ public class TourController extends HttpServlet {
     }
 
 
-    private void get(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
-        int id = Integer.parseInt(req.getParameter("id"));
-
-        resp.setContentType("text/html");
-        PrintWriter out = resp.getWriter();
-        out.println("<html><body>");
-        out.println(service.get(id));
-        out.println("</body></html>");
-        out.close();
+    private void get(HttpServletRequest req, HttpServletResponse resp) {
+        throw new UnsupportedOperationException();
     }
 
     private void getAll(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+
+        String level = req.getParameter("level");
         List<Tour> tours = (List<Tour>) service.getAll();
+
         req.setAttribute("tours", tours);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/showTours.jsp");
+        RequestDispatcher dispatcher;
+        if ("manager".equals(level))
+            dispatcher = req.getRequestDispatcher("/showToursManager.jsp");
+        else if ("customer".equals(level))
+            dispatcher = req.getRequestDispatcher("/showToursCustomer.jsp");
+        else
+            dispatcher = req.getRequestDispatcher("/showToursNobody.jsp");
         dispatcher.forward(req, resp);
     }
 
@@ -109,8 +109,8 @@ public class TourController extends HttpServlet {
     private void delete(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
         int id = Integer.parseInt(req.getParameter("id"));
-
         Tour tour = new Tour(id);
+
         service.delete(tour);
 
         getAll(req, resp);
@@ -121,17 +121,5 @@ public class TourController extends HttpServlet {
         service.deleteAll();
 
         getAll(req, resp);
-
     }
-
-    private void count(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.setContentType("text/html");
-        PrintWriter out = resp.getWriter();
-        out.println("<html><body>");
-        out.println(service.count());
-        out.println("</body></html>");
-        out.close();
-    }
-
-
 }

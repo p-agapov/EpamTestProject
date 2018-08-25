@@ -17,4 +17,8 @@ public class Order {
         this.tourId = tourId;
         this.isPaid = isPaid;
     }
+
+    public Order(int orderId) {
+        this.orderId = orderId;
+    }
 }

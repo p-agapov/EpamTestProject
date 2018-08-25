@@ -1,10 +1,11 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Tours list</title>
 </head>
 <body>
+
 <table border="2">
     <tr>
         <td>ID</td>
@@ -21,31 +22,17 @@
             <td>${tour.isHot()}</td>
             <td>${tour.getDiscount()}</td>
             <td>
-                <form action="updateTour.jsp" method="post">
+                <form action="/orders" method="post">
                     <input type="hidden" name="id" value="${tour.getTourId()}">
                     <input type="hidden" name="name" value="${tour.getName()}">
                     <input type="hidden" name="price" value="${tour.getPrice()}">
-                    <input type="hidden" name="hot" value="${tour.isHot()?"on":""}">
                     <input type="hidden" name="discount" value="${tour.getDiscount()}">
-                    <input type="submit" value="Change" style="float:left">
-                </form>
-                <form action="/tours" method="post">
-                    <input type="hidden" name="method" value="delete"/>
-                    <input type="hidden" name="id" value="${tour.getTourId()}">
-                    <input type="submit" value="Удалить" style="float:left">
+                    <input type="submit" value="Order and pay" style="float:left">
                 </form>
             </td>
         </tr>
     </c:forEach>
 </table>
 
-<form action="addTour.jsp">
-    <input type="submit" value="Add new tour">
-</form>
-
-<form action="/tours" method="post">
-    <input type="hidden" name="method" value="deleteAll">
-    <input type="submit" value="Delete all tours">
-</form>
 </body>
 </html>
