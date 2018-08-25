@@ -10,12 +10,12 @@ import java.util.Random;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-class OrderDaoImplTest {
+public class OrderDaoImplTest {
 
     private static OrderDao orderDao;
     private static Order order;
 
-    static private Order randomOrder() {
+    public static Order randomOrder() {
         Random random = new Random();
         int customerId = Math.abs(random.nextInt());
         int tourId = Math.abs(random.nextInt());
@@ -70,5 +70,21 @@ class OrderDaoImplTest {
     void deleteOne() {
         orderDao.add(order);
         assertThat(orderDao.deleteOne(order).count(), is(0));
+    }
+
+    @Test
+    void getByCustId() {
+
+        int customerId = 1;
+        int num = 2;
+
+        orderDao.add(new Order(customerId, 2, true));
+        orderDao.add(new Order(customerId, 3, true));
+        orderDao.add(new Order(2, 2, true));
+
+        assertThat(orderDao.getByCustId(customerId).size(), is(num));
+
+        orderDao.clear();
+
     }
 }

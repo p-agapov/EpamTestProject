@@ -19,7 +19,8 @@ public class OrderDaoImpl implements OrderDao {
 
     private static final String INSERT_SQL = "INSERT INTO orders (customer_id, tour_id, paid) VALUES (?, ?, ?)";
     private static final String GET_ALL_SQL = "SELECT order_id, customer_id, tour_id, paid FROM orders";
-    private static final String GET_ONE_SQL = "SELECT order_id, customer_id, tour_id, paid FROM orders where order_id = ?";
+    private static final String GET_BY_CUSTOMER_SQL = "SELECT order_id, customer_id, tour_id, paid FROM orders WHERE customer_id = ?";
+    private static final String GET_ONE_SQL = "SELECT order_id, customer_id, tour_id, paid FROM orders WHERE order_id = ?";
     private static final String DELETE_ALL_SQL = "DELETE FROM orders";
     private static final String DELETE_ONE_SQL = "DELETE FROM orders WHERE order_id = ?";
     private static final String UPDATE_SQL = "UPDATE orders SET customer_id = ?, tour_id = ?, paid = ? WHERE order_id = ?";
@@ -54,7 +55,6 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     @SneakyThrows
     public List<Order> getAll() {
-
         @Cleanup val connection = connector.getConnection();
         @Cleanup val statement = connection.createStatement();
         @Cleanup val rs = statement.executeQuery(GET_ALL_SQL);
@@ -86,6 +86,26 @@ public class OrderDaoImpl implements OrderDao {
                         rs.getInt(TOUR_FIELD),
                         rs.getBoolean(PAID_FIELD))
                 : null;
+    }
+
+    @SneakyThrows
+    @Override
+    public List<Order> getByCustId(int customerId) {
+        @Cleanup val connection = connector.getConnection();
+        @Cleanup val ps = connection.prepareStatement(GET_BY_CUSTOMER_SQL);
+        ps.setLong(1, customerId);
+        @Cleanup val rs = ps.executeQuery();
+
+        List<Order> orders = new ArrayList<>();
+
+        while (rs.next()) {
+            orders.add(new Order(rs.getInt(ID_FIELD),
+                    rs.getInt(CUSTOMER_FIELD),
+                    rs.getInt(TOUR_FIELD),
+                    rs.getBoolean(PAID_FIELD)));
+        }
+
+        return orders;
     }
 
     @Override

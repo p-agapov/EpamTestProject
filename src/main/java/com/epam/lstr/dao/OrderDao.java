@@ -7,9 +7,11 @@ import java.util.List;
 public interface OrderDao {
     Order add(Order order);
 
-    List<Order> getAll();
-
     Order getById(int orderId);
+
+    List<Order> getByCustId(int customerId);
+
+    List<Order> getAll();
 
     OrderDao update(Order order);
 
