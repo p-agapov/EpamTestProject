@@ -45,13 +45,20 @@ public class CustomerDaoImplTest {
     @DisplayName("Update method works correctly.")
     void update() {
         customerDao.create(customer);
+        Customer updatedCustomer = new Customer(
+                customer.getCustomerId(),
+                customer.getName(),
+                customer.getSurname(),
+                customer.isVIP(),
+                customer.getUserId()
+        );
 
-        customer.setName("Donna");
-        customer.setSurname("Pomodorio");
-        customer.setVIP(false);
-        customerDao.update(customer);
+        updatedCustomer.setName("Donna");
+        updatedCustomer.setSurname("Pomodorio");
+        updatedCustomer.setVIP(false);
+        customerDao.update(updatedCustomer);
 
-        assertThat(customerDao.getCustomerById(customer.getCustomerId()), is(customer));
+        assertThat(customerDao.getCustomerById(customer.getCustomerId()), is(updatedCustomer));
 
         customerDao.delete(customer);
     }
