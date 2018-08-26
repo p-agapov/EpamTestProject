@@ -1,6 +1,6 @@
 package com.epam.lstr.dao.impl;
 
-import com.epam.lstr.dao.Connector;
+import com.epam.lstr.dao.ConnectionPool;
 import com.epam.lstr.dao.OrderDao;
 import com.epam.lstr.model.Order;
 import lombok.Cleanup;
@@ -15,7 +15,6 @@ import static java.sql.Statement.RETURN_GENERATED_KEYS;
 public class OrderDaoImpl implements OrderDao {
 
 
-    private Connector connector = Connector.getConnector();
 
     private static final String INSERT_SQL = "INSERT INTO orders (customer_id, tour_id, paid) VALUES (?, ?, ?)";
     private static final String GET_ALL_SQL = "SELECT order_id, customer_id, tour_id, paid FROM orders";
@@ -34,7 +33,7 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     @SneakyThrows
     public Order add(Order order) {
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val ps = connection.prepareStatement(INSERT_SQL, RETURN_GENERATED_KEYS);
 
         ps.setString(1, String.valueOf(order.getCustomerId()));
@@ -55,7 +54,7 @@ public class OrderDaoImpl implements OrderDao {
     @SneakyThrows
     public List<Order> getAll() {
 
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val statement = connection.createStatement();
         @Cleanup val rs = statement.executeQuery(GET_ALL_SQL);
 
@@ -74,7 +73,7 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     @SneakyThrows
     public Order getById(int orderId) {
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val ps = connection.prepareStatement(GET_ONE_SQL);
         ps.setInt(1, orderId);
         @Cleanup val rs = ps.executeQuery();
@@ -91,7 +90,7 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     @SneakyThrows
     public OrderDao update(Order order) {
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val ps = connection.prepareStatement(UPDATE_SQL, RETURN_GENERATED_KEYS);
 
         ps.setString(1, String.valueOf(order.getCustomerId()));
@@ -108,7 +107,7 @@ public class OrderDaoImpl implements OrderDao {
     @SneakyThrows
     public OrderDao deleteOne(Order order) {
 
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val ps = connection.prepareStatement(DELETE_ONE_SQL);
         ps.setLong(1, order.getOrderId());
         ps.executeLargeUpdate();
@@ -119,7 +118,7 @@ public class OrderDaoImpl implements OrderDao {
     @SneakyThrows
     public OrderDao clear() {
 
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val statement = connection.createStatement();
         statement.execute(DELETE_ALL_SQL);
 
@@ -129,7 +128,7 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     @SneakyThrows
     public int count() {
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val statement = connection.createStatement();
         @Cleanup val rs = statement.executeQuery(COUNT_SQL);
         return rs.next() ? rs.getInt(1) : 0;
