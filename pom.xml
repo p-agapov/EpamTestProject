@@ -34,9 +34,10 @@
         </dependency>
 
         <dependency>
-            <groupId>postgresql</groupId>
+            <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>LATEST</version>
+            <version>42.2.4</version>
+            <type>bundle</type>
         </dependency>
 
         <!-- CODE GENERATION (Lombok) -->
