@@ -10,19 +10,19 @@
     <input type="submit" value="Register">
 </form>
 
-<form action="/users" method="post">
+<form action="users" method="post">
     <input type="hidden" value="login">
     <input type="text" name="login" maxlength="20" required>
     <input type="password" name="password" maxlength="20" required>
     <input type="submit" value="Login">
 </form>
 
-<form action="/tours" method="get">
+<form action="tours" method="get">
     <input type="hidden" name="method" value="getSortedByPrice">
     <input type="submit" value="Sort by price">
 </form>
 
-<form action="/tours" method="get">
+<form action="tours" method="get">
     <input type="hidden" name="method" value="getSortedByDiscount">
     <input type="submit" value="Sort by discount">
 </form>

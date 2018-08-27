@@ -4,7 +4,7 @@
     <title>Update tour</title>
 </head>
 <body>
-<form action="/tours" method="post">
+<form action="tours" method="post">
     <input type="hidden" name="method" value="set"/>
     <input type="hidden" name="level" value="manager"/>
     <input type="hidden" name="id" value="${param.id}">

@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<form action="/users" method="get">
+<form action="users" method="get">
     <input type="hidden" name="method" value="get"/>
     Enter ID to find user:
     <input type="text" name="id" title="id"/>
@@ -49,7 +49,7 @@
                     <input type="hidden" name="role" value="${user.getRole()}">
                     <input type="submit" value="Edit" style="float:left">
                 </form>
-                <form action="/users" method="post" onsubmit="return(confirm('Realy?'))">
+                <form action="users" method="post" onsubmit="return(confirm('Realy?'))">
                     <input type="hidden" name="id" value="${user.getId()}">
                     <input type="submit" value="Delete" style="float:left">
                     <input type="hidden" name="method" value="delete"/>
@@ -64,13 +64,13 @@
 </form>
 
 <br>
-<form action="/users" method="post" onsubmit="return(confirm('Realy?'))">
+<form action="users" method="post" onsubmit="return(confirm('Realy?'))">
     <input type=submit value="Delete All">
     <input type="hidden" name="method" value="deleteAll"/>
 </form>
 
 <br>
-<form action="/users" method="get">
+<form action="users" method="get">
     <input type="hidden" name="method" value="count"/>
     <input type="submit" value="Count" title="count">
     Quantity of Users:

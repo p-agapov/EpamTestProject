@@ -11,18 +11,18 @@ You:
 <c:out value="${customer.getName()} ${customer.getSurname()}"/>
 
 
-<form action="/logged" method="get">
+<form action="logged" method="get">
     <input type="hidden" name="method" value="getOrders">
     <input type="submit" value="Show my orders">
 </form>
 
 
-<form action="/logged" method="get">
+<form action="logged" method="get">
     <input type="hidden" name="method" value="getSortedByPrice">
     <input type="submit" value="Sort by price">
 </form>
 
-<form action="/logged" method="get">
+<form action="logged" method="get">
     <input type="hidden" name="method" value="getSortedByDiscount">
     <input type="submit" value="Sort by discount">
 </form>
@@ -43,7 +43,7 @@ You:
             <td>${tour.isHot()}</td>
             <td>${tour.getDiscount()}</td>
             <td>
-                <form action="/logged" method="post">
+                <form action="logged" method="post">
                     <input type="hidden" name="method" value="buy">
                     <input type="hidden" name="tour_id" value="${tour.getTourId()}">
                     <input type="submit" value="Order and pay" style="float:left">

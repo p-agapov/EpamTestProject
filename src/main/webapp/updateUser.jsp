@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<form action="/users" method="post">
+<form action="users" method="post">
     Fill the fields: <br>
     Login:<br>
     <input type="text" name="login" maxlength="20" required> <br>
@@ -35,7 +35,7 @@
 <c:out value="${yes}" default="No updates done yet"/>
 <br>
 
-<form action="/users" method="get">
+<form action="users" method="get">
     <input type="hidden" name="method" value="getAll"/>
     <input type="submit" value="Back to users list">
 </form>

@@ -15,7 +15,7 @@
 Hello, Welcome! <br>
 
 Please, fill the fields below: <br>
-<form action="/users" method="post">
+<form action="users" method="post">
     Login<br>
     <input type="text" name="login" maxlength="20" required> <br>
     Password:<br>

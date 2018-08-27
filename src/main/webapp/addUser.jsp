@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<form action="/users" method="post">
+<form action="users" method="post">
     Fill the fields:<br>
     Login<br>
     <input type="text" name="login" maxlength="20" required> <br>

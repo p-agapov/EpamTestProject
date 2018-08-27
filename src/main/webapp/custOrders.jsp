@@ -32,7 +32,7 @@ Orders: <br>
             </td>
         </c:forEach>
         <td>
-            <form action="/tours" method="get">
+            <form action="tours" method="get">
                 <input type="hidden" name="method" value="get">
                 <input type="hidden" name="id" value="tourId">
                 <input type="button" value="Tour info">

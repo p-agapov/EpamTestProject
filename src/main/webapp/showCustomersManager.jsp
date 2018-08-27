@@ -10,7 +10,7 @@
     <input type="submit" value="Add new customer">
 </form>
 
-<form action="/customers" method="post">
+<form action="customers" method="post">
     <input type="hidden" name="method" value="deleteAll">
     <input type="submit" value="Delete all customers">
 </form>
@@ -41,7 +41,7 @@
                     <input type="hidden" name="userid" value="${customer.getUserId()}">
                     <input type="submit" value="Change" style="float:left">
                 </form>
-                <form action="/customers" method="post">
+                <form action="customers" method="post">
                     <input type="hidden" name="method" value="delete"/>
                     <input type="hidden" name="id" value="${customer.getCustomerId()}">
                     <input type="submit" value="Удалить" style="float:left">

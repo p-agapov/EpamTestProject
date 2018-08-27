@@ -11,18 +11,18 @@ You:
 <c:out value="${customer.getName()} ${customer.getSurname()}"/>
 
 
-<form action="/logged" method="get">
+<form action="logged" method="get">
     <input type="hidden" name="method" value="getTours">
     <input type="submit" value="Show all tours">
 </form>
 
 
-<form action="/logged" method="get">
+<form action="logged" method="get">
     <input type="hidden" name="method" value="getSortedByPrice">
     <input type="submit" value="Sort by price">
 </form>
 
-<form action="/logged" method="get">
+<form action="logged" method="get">
     <input type="hidden" name="method" value="getSortedByDiscount">
     <input type="submit" value="Sort by discount">
 </form>

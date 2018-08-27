@@ -13,7 +13,7 @@
 <body>
 
 Please, fill the fields below: <br>
-<form action="/logged" method="post">
+<form action="logged" method="post">
     <input type="hidden" name="method" value="add"/>
     Name:<br>
     <input type="text" name="name" maxlength="20" required> <br>

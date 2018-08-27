@@ -6,7 +6,7 @@
 <body>
 <H3>Adding new Customer</H3>
 Please fill in form below.
-<form action="/customers" method="post">
+<form action="customers" method="post">
     <input type="hidden" name="method" value="add"/>
     <input type="hidden" name="level" value="manager"/>
     <p><b>Name</b></p>

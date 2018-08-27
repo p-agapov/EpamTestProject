@@ -4,7 +4,7 @@
     <title>Add new tour</title>
 </head>
 <body>
-<form action="/tours" method="post">
+<form action="tours" method="post">
     <input type="hidden" name="method" value="add"/>
     <input type="hidden" name="level" value="manager"/>
     <input required type="text" name="name" placeholder="Name">
