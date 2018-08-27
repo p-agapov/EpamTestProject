@@ -1,6 +1,6 @@
 package com.epam.lstr.dao.impl;
 
-import com.epam.lstr.dao.Connector;
+import com.epam.lstr.dao.ConnectionPool;
 import com.epam.lstr.dao.CustomerDao;
 import com.epam.lstr.model.Customer;
 import lombok.Cleanup;
@@ -39,12 +39,11 @@ public class CustomerDaoImpl implements CustomerDao {
     static final String VIP_FIELD = "VIP";
     static final String USER_ID_FIELD = "user_id";
 
-    Connector connector = Connector.getConnector();
 
     @NonNull
     @SneakyThrows
     public Customer create(@NonNull Customer customer) {
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val preparedStatement = connection.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS);
 
         preparedStatement.setString(1, customer.getName());
@@ -65,7 +64,7 @@ public class CustomerDaoImpl implements CustomerDao {
     @NonNull
     @SneakyThrows
     public Customer update(@NonNull Customer customer) {
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val preparedStatement = connection.prepareStatement(UPDATE_SQL);
 
         preparedStatement.setString(1, customer.getName());
@@ -81,7 +80,7 @@ public class CustomerDaoImpl implements CustomerDao {
     @NonNull
     @SneakyThrows
     public CustomerDao delete(@NonNull Customer customer) {
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val preparedStatement = connection.prepareStatement(DELETE_SQL);
 
         preparedStatement.setInt(1, customer.getCustomerId());
@@ -92,7 +91,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @SneakyThrows
     public Customer getCustomerById(int id) {
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val preparedStatement = connection.prepareStatement(GET_SQL);
 
         preparedStatement.setInt(1, id);
@@ -113,7 +112,7 @@ public class CustomerDaoImpl implements CustomerDao {
     @NonNull
     @SneakyThrows
     public List<Customer> getAllCustomers() {
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val statement = connection.createStatement();
         @Cleanup val resultSet = statement.executeQuery(GET_ALL_SQL);
 
@@ -134,7 +133,7 @@ public class CustomerDaoImpl implements CustomerDao {
     @NonNull
     @SneakyThrows
     public CustomerDao clear() {
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val preparedStatement = connection.prepareStatement(DELETE_ALL_SQL);
         preparedStatement.executeUpdate();
         return this;
@@ -142,7 +141,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @SneakyThrows
     public int count() {
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val statement = connection.createStatement();
         @Cleanup val resultSet = statement.executeQuery(COUNT_SQL);
         return resultSet.next() ? resultSet.getInt(1) : 0;

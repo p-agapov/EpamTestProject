@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-class ConnectorTest {
+class ConnectionPoolTest {
+
 
     @Test
     @SneakyThrows
     void getConnection() {
-        val connector = Connector.getConnector();
-        val connection = connector.getConnection();
+        val connection = ConnectionPool.getConnection();
         assertThat(connection.isValid(1), is(true));
     }
 }
