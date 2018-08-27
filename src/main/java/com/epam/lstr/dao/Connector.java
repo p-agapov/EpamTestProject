@@ -32,13 +32,13 @@ public class Connector {
 
     @SneakyThrows
     public Connection getConnection() {
-        return DriverManager.getConnection(DB_URL);
+        return DriverManager.getConnection(DB_URL, "postgres", "postgres");
     }
 
     @SneakyThrows
     private void init() {
         Class.forName(JDBC_DRIVER).newInstance();
-        @Cleanup val connection = DriverManager.getConnection(DB_URL);
+        @Cleanup val connection = DriverManager.getConnection(DB_URL, "postgres", "postgres");
         @Cleanup val statement = connection.createStatement();
         statement.executeUpdate(CREATE_USERS_SQL);
         statement.executeUpdate(CREATE_TOURS_SQL);
