@@ -41,9 +41,9 @@ public class TourDaoImpl implements TourDao {
         @Cleanup val ps = connection.prepareStatement(INSERT_SQL, RETURN_GENERATED_KEYS);
 
         ps.setString(1, tour.getName());
-        ps.setString(2, String.valueOf(tour.getPrice()));
-        ps.setString(3, String.valueOf(tour.isHot()));
-        ps.setString(4, String.valueOf(tour.getDiscount()));
+        ps.setInt(2, tour.getPrice());
+        ps.setBoolean(3, tour.isHot());
+        ps.setInt(4, tour.getDiscount());
 
         ps.executeUpdate();
 

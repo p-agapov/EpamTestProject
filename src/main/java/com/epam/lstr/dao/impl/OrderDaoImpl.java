@@ -38,9 +38,9 @@ public class OrderDaoImpl implements OrderDao {
         @Cleanup val connection = connector.getConnection();
         @Cleanup val ps = connection.prepareStatement(INSERT_SQL, RETURN_GENERATED_KEYS);
 
-        ps.setString(1, String.valueOf(order.getCustomerId()));
-        ps.setString(2, String.valueOf(order.getTourId()));
-        ps.setString(3, String.valueOf(order.isPaid()));
+        ps.setInt(1, order.getCustomerId());
+        ps.setInt(2, order.getTourId());
+        ps.setBoolean(3, order.isPaid());
 
         ps.executeUpdate();
 
