@@ -1,8 +1,6 @@
 package com.epam.lstr.dao;
 
-import lombok.Cleanup;
 import lombok.SneakyThrows;
-import lombok.val;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,7 +22,7 @@ public class Connector {
     private static Connector connector;
 
     private Connector() {
-//        init();
+        init();
     }
 
     public static Connector getConnector() {
@@ -41,13 +39,13 @@ public class Connector {
     @SneakyThrows
     private void init() {
         Class.forName(JDBC_DRIVER).newInstance();
-        @Cleanup val connection = DriverManager.getConnection(DB_URL, "postgres", "postgres");
+        /*@Cleanup val connection = DriverManager.getConnection(DB_URL, "postgres", "postgres");
         @Cleanup val statement = connection.createStatement();
         statement.executeUpdate(CREATE_USERS_SQL);
         statement.executeUpdate(CREATE_TOURS_SQL);
         statement.executeUpdate(CREATE_CUSTOMERS_SQL);
         statement.executeUpdate(CREATE_ORDERS_SQL);
-        statement.executeUpdate(INSERT_MANAGER_SQL);
+        statement.executeUpdate(INSERT_MANAGER_SQL);*/
 
     }
 }
