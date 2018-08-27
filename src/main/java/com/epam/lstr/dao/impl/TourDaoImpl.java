@@ -38,7 +38,7 @@ public class TourDaoImpl implements TourDao {
     @SneakyThrows
     public Tour add(@NonNull Tour tour) {
         @Cleanup val connection = connector.getConnection();
-        @Cleanup val ps = connection.prepareStatement(INSERT_SQL, new String[]{ID_FIELD});
+        @Cleanup val ps = connection.prepareStatement(INSERT_SQL, RETURN_GENERATED_KEYS);
 
         ps.setString(1, tour.getName());
         ps.setString(2, String.valueOf(tour.getPrice()));
