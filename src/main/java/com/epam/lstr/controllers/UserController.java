@@ -2,6 +2,7 @@ package com.epam.lstr.controllers;
 
 import com.epam.lstr.model.User;
 import com.epam.lstr.services.impl.UserServiceImpl;
+import com.google.common.hash.Hashing;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.function.Function;
 
 @WebServlet("/users")
 public class UserController extends HttpServlet {
@@ -141,7 +144,7 @@ public class UserController extends HttpServlet {
 
     private void register(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String login = req.getParameter(LOG);
-        String password = req.getParameter(PAS);
+        String password = GET_HASHED.apply(req.getParameter(PAS));
         String role = req.getParameter("role");
         User user = new User(login, password, role);
         userService.add(user);
@@ -152,7 +155,7 @@ public class UserController extends HttpServlet {
 
     private void login(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String login = req.getParameter(LOG);
-        String password = req.getParameter(PAS);
+        String password = GET_HASHED.apply(req.getParameter(PAS));
         String redirect;
         User user = userService.getByLogPas(login, password);
 
@@ -167,4 +170,8 @@ public class UserController extends HttpServlet {
             dispatcher.forward(req, resp);
         }
     }
+
+    private Function<String, String> GET_HASHED = string -> Hashing.sha256()
+            .hashString(string, StandardCharsets.UTF_8)
+            .toString();
 }
