@@ -81,6 +81,8 @@ class UserDaoImplTest {
 
     @Test
     void findByLogPas() {
+        userDao.deleteAllUsers();
+        userDao.insertUser(vasya);
         assertThat(userDao.findByLogPas(LOG, "admin"), is(vasya));
     }
 }
