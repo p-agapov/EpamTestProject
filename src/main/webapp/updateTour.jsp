@@ -6,6 +6,7 @@
 <body>
 <form action="/tours" method="post">
     <input type="hidden" name="method" value="set"/>
+    <input type="hidden" name="level" value="manager"/>
     <input type="hidden" name="id" value="${param.id}">
     <input type="text" name="name" value="${param.name}" placeholder=${param.name}>
     <input type="number" name="price" value="${param.price}" placeholder=${param.price}>

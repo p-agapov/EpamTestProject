@@ -6,6 +6,7 @@
 <body>
 <form action="/tours" method="post">
     <input type="hidden" name="method" value="add"/>
+    <input type="hidden" name="level" value="manager"/>
     <input required type="text" name="name" placeholder="Name">
     <input required type="number" name="price" placeholder="Price">
     <input required type="checkbox" name="hot" placeholder="Hot">

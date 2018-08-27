@@ -15,7 +15,21 @@
     <input type="submit" value="Delete all tours">
 </form>
 
+
 <p>Total tours: <c:out value="${tours.size()}"/></p>
+
+<form action="/tours" method="get">
+    <input type="hidden" name="method" value="getSortedByPrice">
+    <input type="hidden" name="level" value="manager"/>
+    <input type="submit" value="Sort by price">
+</form>
+
+<form action="/tours" method="get">
+    <input type="hidden" name="method" value="getSortedByDiscount">
+    <input type="hidden" name="level" value="manager"/>
+    <input type="submit" value="Sort by discount">
+</form>
+
 
 <table border="2">
     <tr>
@@ -34,6 +48,7 @@
             <td>${tour.getDiscount()}</td>
             <td>
                 <form action="updateTour.jsp" method="post">
+                    <input type="hidden" name="level" value="manager"/>
                     <input type="hidden" name="id" value="${tour.getTourId()}">
                     <input type="hidden" name="name" value="${tour.getName()}">
                     <input type="hidden" name="price" value="${tour.getPrice()}">
@@ -42,9 +57,10 @@
                     <input type="submit" value="Change" style="float:left">
                 </form>
                 <form action="/tours" method="post">
+                    <input type="hidden" name="level" value="manager"/>
                     <input type="hidden" name="method" value="delete"/>
                     <input type="hidden" name="id" value="${tour.getTourId()}">
-                    <input type="submit" value="Удалить" style="float:left">
+                    <input type="submit" value="Delete" style="float:left">
                 </form>
             </td>
         </tr>

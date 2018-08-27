@@ -6,6 +6,16 @@
 </head>
 <body>
 
+<form action="/tours" method="get">
+    <input type="hidden" name="method" value="getSortedByPrice">
+    <input type="submit" value="Sort by price">
+</form>
+
+<form action="/tours" method="get">
+    <input type="hidden" name="method" value="getSortedByDiscount">
+    <input type="submit" value="Sort by discount">
+</form>
+
 <table border="2">
     <tr>
         <td>ID</td>

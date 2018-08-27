@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @WebServlet("/tours")
@@ -30,6 +32,12 @@ public class TourController extends HttpServlet {
                     break;
                 case "getAll":
                     getAll(req, resp);
+                    break;
+                case "getSortedByPrice":
+                    getSortedByPrice(req, resp);
+                    break;
+                case "getSortedByDiscount":
+                    getSortedByDiscount(req, resp);
                     break;
                 default:
                     getAll(req, resp);
@@ -59,7 +67,13 @@ public class TourController extends HttpServlet {
 
 
     private void get(HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException();
+
+        int id = Integer.parseInt(req.getParameter("tour_id"));
+
+        Tour tour = service.get(id);
+
+        req.setAttribute("tour", tour);
+
     }
 
     private void getAll(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -68,13 +82,30 @@ public class TourController extends HttpServlet {
         List<Tour> tours = (List<Tour>) service.getAll();
 
         req.setAttribute("tours", tours);
-        RequestDispatcher dispatcher;
-        if ("manager".equals(level))
-            dispatcher = req.getRequestDispatcher("/showToursManager.jsp");
-        else if ("customer".equals(level))
-            dispatcher = req.getRequestDispatcher("/showToursCustomer.jsp");
-        else
-            dispatcher = req.getRequestDispatcher("/showToursNobody.jsp");
+        RequestDispatcher dispatcher = decideAccess(req, level);
+
+        dispatcher.forward(req, resp);
+    }
+
+    private void getSortedByPrice(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+
+        String level = req.getParameter("level");
+        List<Tour> tours = getSorted(Comparator.comparing(Tour::getPrice));
+
+        req.setAttribute("tours", tours);
+        RequestDispatcher dispatcher = decideAccess(req, level);
+
+        dispatcher.forward(req, resp);
+    }
+
+    private void getSortedByDiscount(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+
+        String level = req.getParameter("level");
+        List<Tour> tours = getSorted(Comparator.comparing(Tour::getDiscount).reversed());
+
+        req.setAttribute("tours", tours);
+        RequestDispatcher dispatcher = decideAccess(req, level);
+
         dispatcher.forward(req, resp);
     }
 
@@ -121,5 +152,23 @@ public class TourController extends HttpServlet {
         service.deleteAll();
 
         getAll(req, resp);
+    }
+
+    private List<Tour> getSorted(Comparator<Tour> comparator) {
+        return service.getAll()
+                .stream()
+                .sorted(comparator)
+                .collect(Collectors.toList());
+    }
+
+    private RequestDispatcher decideAccess(HttpServletRequest req, String level) {
+        RequestDispatcher dispatcher;
+        if ("manager".equals(level))
+            dispatcher = req.getRequestDispatcher("/showToursManager.jsp");
+        else if ("customer".equals(level))
+            dispatcher = req.getRequestDispatcher("/showToursCustomer.jsp");
+        else
+            dispatcher = req.getRequestDispatcher("/showToursNobody.jsp");
+        return dispatcher;
     }
 }
