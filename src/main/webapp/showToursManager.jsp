@@ -11,6 +11,7 @@
 </form>
 
 <form action="/tours" method="post">
+    <input type="hidden" name="level" value="manager"/>
     <input type="hidden" name="method" value="deleteAll">
     <input type="submit" value="Delete all tours">
 </form>

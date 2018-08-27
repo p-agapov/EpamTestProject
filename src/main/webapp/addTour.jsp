@@ -9,7 +9,7 @@
     <input type="hidden" name="level" value="manager"/>
     <input required type="text" name="name" placeholder="Name">
     <input required type="number" name="price" placeholder="Price">
-    <input required type="checkbox" name="hot" placeholder="Hot">
+    <input type="checkbox" name="hot" placeholder="Hot">
     <input required type="number" name="discount" placeholder="Price">
     <input type="submit" value="Save">
 </form>
