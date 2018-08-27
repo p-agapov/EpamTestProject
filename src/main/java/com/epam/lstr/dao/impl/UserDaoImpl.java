@@ -7,6 +7,7 @@ import lombok.Cleanup;
 import lombok.NonNull;
 import lombok.SneakyThrows;
 import lombok.val;
+
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ import static java.sql.Statement.RETURN_GENERATED_KEYS;
 public class UserDaoImpl implements UserDao {
     private static final String INSERT_SQL = "insert into users (login, password, role) values (?, ?, ?)";
     private static final String FIND_SQL = "select user_id, login, password, role from users where user_id = ?";
+    private static final String FIND_BY_LOGIN_PASS_SQL = "select user_id, login, password, role from users where login = ? and password = ?";
     private static final String FIND_ALL_SQL = "select user_id, login, password, role from users";
     private static final String UPDATE_SQL = "update users set login = ?, password = ?, role = ? where user_id = ?";
     private static final String GETROLE_SQL = "select role from users where user_id = ?";
@@ -24,6 +26,11 @@ public class UserDaoImpl implements UserDao {
     private static final String COUNT_SQL = "select count(user_id) from users";
 
     private Connector connector = Connector.getConnector();
+
+    private static final String ID_FIELD = "user_id";
+    private static final String LOGIN_FIELD = "login";
+    private static final String PASS_FIELD = "password";
+    private static final String ROLE_FIELD = "role";
 
     @SneakyThrows
     public User insertUser(@NonNull User u) {
@@ -58,6 +65,25 @@ public class UserDaoImpl implements UserDao {
             role = rs.getString(4);
         }
         return new User(userId, login, password, role);
+    }
+
+    @SneakyThrows
+    @Override
+    public User findByLogPas(String login, String password) {
+
+        @Cleanup val connection = connector.getConnection();
+        @Cleanup val ps = connection.prepareStatement(FIND_BY_LOGIN_PASS_SQL);
+        ps.setString(1, login);
+        ps.setString(2, password);
+
+        @Cleanup ResultSet rs = ps.executeQuery();
+
+        return rs.next() ?
+                new User(rs.getInt(ID_FIELD),
+                        rs.getString(LOGIN_FIELD),
+                        rs.getString(PASS_FIELD),
+                        rs.getString(ROLE_FIELD))
+                : null;
     }
 
     @NonNull

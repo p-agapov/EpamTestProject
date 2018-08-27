@@ -3,6 +3,7 @@ package com.epam.lstr.dao.impl;
 import com.epam.lstr.model.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -76,5 +77,10 @@ class UserDaoImplTest {
     void testCountAllUsers() {
         int count = userDao.countAllUsers();
         assertThat(count, is(1));
+    }
+
+    @Test
+    void findByLogPas() {
+        assertThat(userDao.findByLogPas(LOG, "admin"), is(vasya));
     }
 }

@@ -17,11 +17,7 @@ public class UserController extends HttpServlet {
     private static UserServiceImpl userService = new UserServiceImpl();
     private static final String LOG = "login";
     private static final String PAS = "password";
-
-    User u = userService.add(new User("uuu", "yyyy", "manager"));
-    User u2 = userService.add(new User("uuu222", "yyyy", "manager"));
-    User u3 = userService.add(new User("uuu333", "yyyy", "manager"));
-
+    private static final String WRONG_LOGIN_MESSAGE = "Wrong login or password.";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -57,6 +53,9 @@ public class UserController extends HttpServlet {
                 break;
             case "deleteAll":
                 deleteAll(req, resp);
+                break;
+            case "login":
+                login(req, resp);
                 break;
             case "register":
                 register(req, resp);
@@ -149,5 +148,23 @@ public class UserController extends HttpServlet {
         req.setAttribute("userId", user.getId());
         RequestDispatcher dispatcher = req.getRequestDispatcher("/registration2.jsp");
         dispatcher.forward(req, resp);
+    }
+
+    private void login(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        String login = req.getParameter(LOG);
+        String password = req.getParameter(PAS);
+        String redirect;
+        User user = userService.getByLogPas(login, password);
+
+        if (user == null) {
+            req.setAttribute("wrong", WRONG_LOGIN_MESSAGE);
+        } else {
+            if (user.getRole().equals("manager"))
+                redirect = "/showToursManager.jsp";
+            else redirect = "/showToursCustomer.jsp";
+
+            RequestDispatcher dispatcher = req.getRequestDispatcher(redirect);
+            dispatcher.forward(req, resp);
+        }
     }
 }

@@ -6,11 +6,14 @@
 </head>
 <body>
 
-<form action="register.jsp">
+<form action="registration1.jsp">
     <input type="submit" value="Register">
 </form>
 
-<form action="managerFrontPage.jsp" method="post">
+<form action="/users" method="post">
+    <input type="hidden" value="login">
+    <input type="text" name="login" maxlength="20" required>
+    <input type="password" name="password" maxlength="20" required>
     <input type="submit" value="Login">
 </form>
 

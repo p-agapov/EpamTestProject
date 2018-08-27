@@ -3,6 +3,7 @@ package com.epam.lstr.services.impl;
 import com.epam.lstr.dao.impl.UserDaoImpl;
 import com.epam.lstr.model.User;
 import com.epam.lstr.services.UserService;
+
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
@@ -14,6 +15,11 @@ public class UserServiceImpl implements UserService {
 
     public User get(int id) {
         return userDao.findUser(id);
+    }
+
+    @Override
+    public User getByLogPas(String login, String password) {
+        return userDao.findByLogPas(login, password);
     }
 
     public List<User> getAll() {
