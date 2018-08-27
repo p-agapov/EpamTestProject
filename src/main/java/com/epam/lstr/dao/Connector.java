@@ -9,14 +9,15 @@ import java.sql.DriverManager;
 
 public class Connector {
 
-    private static final String JDBC_DRIVER = "org.h2.Driver";
-    private static final String DB_URL = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1";
+    private static final String JDBC_DRIVER = "org.postgresql.Driver";
+    private static final String DB_URL = "jdbc:postgresql://10.6.198.142:5432/postgres";
 
     private static final String CREATE_USERS_SQL = "CREATE TABLE IF NOT EXISTS users (user_id IDENTITY, login varchar not null, password varchar, role enum('manager','customer'))";
     private static final String CREATE_TOURS_SQL = "CREATE TABLE IF NOT EXISTS tours (tour_id IDENTITY, name varchar, price int, hot boolean, discount int)";
     private static final String CREATE_ORDERS_SQL = "CREATE TABLE IF NOT EXISTS orders (order_id IDENTITY, customer_id int, tour_id int, paid boolean)";
     private static final String CREATE_CUSTOMERS_SQL = "CREATE TABLE IF NOT EXISTS customers (customer_id IDENTITY, name varchar, surname varchar, vip boolean, user_id int)";
-
+    private static final String INSERT_MANAGER_SQL = "INSERT INTO users (login, password, role)\n" +
+            "VALUES ('admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'manager')";
     private static Connector connector;
 
     private Connector() {
@@ -43,6 +44,7 @@ public class Connector {
         statement.executeUpdate(CREATE_TOURS_SQL);
         statement.executeUpdate(CREATE_CUSTOMERS_SQL);
         statement.executeUpdate(CREATE_ORDERS_SQL);
+        statement.executeUpdate(INSERT_MANAGER_SQL);
 
     }
 }
