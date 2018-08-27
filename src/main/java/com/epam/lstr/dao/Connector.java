@@ -9,7 +9,7 @@ import java.sql.DriverManager;
 
 public class Connector {
 
-    private static String PASHA_SERVER = "agapovp.com";
+    private static String PASHA_SERVER = "176.57.220.5";
     private static String EPAM_SERVER = "10.6.198.142";
 
     private static final String JDBC_DRIVER = "org.postgresql.Driver";
