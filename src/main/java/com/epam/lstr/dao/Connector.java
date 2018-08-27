@@ -9,10 +9,13 @@ import java.sql.DriverManager;
 
 public class Connector {
 
-    private static final String JDBC_DRIVER = "org.postgresql.Driver";
-    private static final String DB_URL = "jdbc:postgresql://10.6.198.142:5432/postgres";
+    private static String PASHA_SERVER = "agapovp.com";
+    private static String EPAM_SERVER = "10.6.198.142";
 
-    private static final String CREATE_USERS_SQL = "CREATE TABLE IF NOT EXISTS users (user_id IDENTITY, login varchar not null, password varchar, role enum('manager','customer'))";
+    private static final String JDBC_DRIVER = "org.postgresql.Driver";
+    private static final String DB_URL = String.format("jdbc:postgresql://%s:5432/postgres", PASHA_SERVER);
+
+    private static final String CREATE_USERS_SQL = "CREATE TABLE IF NOT EXISTS users (user_id INT, login varchar not null, password varchar, role enum('manager','customer'))";
     private static final String CREATE_TOURS_SQL = "CREATE TABLE IF NOT EXISTS tours (tour_id IDENTITY, name varchar, price int, hot boolean, discount int)";
     private static final String CREATE_ORDERS_SQL = "CREATE TABLE IF NOT EXISTS orders (order_id IDENTITY, customer_id int, tour_id int, paid boolean)";
     private static final String CREATE_CUSTOMERS_SQL = "CREATE TABLE IF NOT EXISTS customers (customer_id IDENTITY, name varchar, surname varchar, vip boolean, user_id int)";
@@ -21,7 +24,7 @@ public class Connector {
     private static Connector connector;
 
     private Connector() {
-        init();
+//        init();
     }
 
     public static Connector getConnector() {
