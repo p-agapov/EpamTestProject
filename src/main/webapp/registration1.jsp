@@ -22,7 +22,6 @@ Please, fill the fields below: <br>
     <input type="password" name="password" maxlength="20" required> <br>
     <input type="hidden" name="role" value="customer"/>
     <input type="hidden" name="method" value="register"/> <br>
-    <%--<jsp:forward page="/registration2.jsp" />--%>
     <input type="submit" value="Next">
 </form>
 

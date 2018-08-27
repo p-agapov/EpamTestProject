@@ -73,7 +73,6 @@ public class TourController extends HttpServlet {
         Tour tour = service.get(id);
 
         req.setAttribute("tour", tour);
-
     }
 
     private void getAll(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -155,7 +154,8 @@ public class TourController extends HttpServlet {
     }
 
     private List<Tour> getSorted(Comparator<Tour> comparator) {
-        return service.getAll()
+        return service
+                .getAll()
                 .stream()
                 .sorted(comparator)
                 .collect(Collectors.toList());

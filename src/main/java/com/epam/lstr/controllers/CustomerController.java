@@ -33,14 +33,6 @@ public class CustomerController extends HttpServlet {
         }
     }
 
-    private void getAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        List<Customer> customers = (List<Customer>) service.getAll();
-        req.setAttribute("customers", customers);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/showCustomersManager.jsp");
-        dispatcher.forward(req, resp);
-    }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -59,6 +51,15 @@ public class CustomerController extends HttpServlet {
         }
     }
 
+    private void getAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        List<Customer> customers = (List<Customer>) service.getAll();
+        req.setAttribute("customers", customers);
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/showCustomersManager.jsp");
+        dispatcher.forward(req, resp);
+    }
+
+
     private void add(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
         String name = req.getParameter("name");
@@ -69,8 +70,10 @@ public class CustomerController extends HttpServlet {
         Customer customer = new Customer(name, surname, isVip, userId);
 
         service.add(customer);
+
         getAll(req, resp);
     }
+
 
     private void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
@@ -86,4 +89,5 @@ public class CustomerController extends HttpServlet {
 
         getAll(req, resp);
     }
+
 }

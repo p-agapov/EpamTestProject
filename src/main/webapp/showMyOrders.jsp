@@ -12,8 +12,8 @@ You:
 
 
 <form action="/logged" method="get">
-    <input type="hidden" name="method" value="getOrders">
-    <input type="submit" value="Show my orders">
+    <input type="hidden" name="method" value="getTours">
+    <input type="submit" value="Show all tours">
 </form>
 
 
@@ -29,7 +29,6 @@ You:
 
 <table border="2">
     <tr>
-        <td>ID</td>
         <td>Name</td>
         <td>Price</td>
         <td>HOT!!!</td>
@@ -37,18 +36,10 @@ You:
     </tr>
     <c:forEach items="${tours}" var="tour">
         <tr>
-            <td>${tour.getTourId()}</td>
             <td>${tour.getName()}</td>
             <td>${tour.getPrice()}</td>
             <td>${tour.isHot()}</td>
             <td>${tour.getDiscount()}</td>
-            <td>
-                <form action="/logged" method="post">
-                    <input type="hidden" name="method" value="buy">
-                    <input type="hidden" name="tour_id" value="${tour.getTourId()}">
-                    <input type="submit" value="Order and pay" style="float:left">
-                </form>
-            </td>
         </tr>
     </c:forEach>
 </table>

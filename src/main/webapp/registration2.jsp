@@ -13,15 +13,14 @@
 <body>
 
 Please, fill the fields below: <br>
-<form action="/customers" method="post">
+<form action="/logged" method="post">
+    <input type="hidden" name="method" value="add"/>
     Name:<br>
     <input type="text" name="name" maxlength="20" required> <br>
     Surname:<br>
     <input type="text" name="surname" maxlength="20" required> <br>
-    <input type="hidden" name="isVip" value="false"/>
-    <input type="hidden" name="userId" value="${userId}"/>
-    <input type="hidden" name="method" value="add"/>
-    <%--<jsp:forward page="/customer.jsp" />--%> <br>
+    <input type="hidden" name="vip" value="false"/>
+    <input type="hidden" name="user_id" value="${userId}"/>
     <input type="submit" value="Next">
 </form>
 

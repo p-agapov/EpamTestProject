@@ -8,6 +8,7 @@
 Please fill in form below.
 <form action="/customers" method="post">
     <input type="hidden" name="method" value="add"/>
+    <input type="hidden" name="level" value="manager"/>
     <p><b>Name</b></p>
     <input required type="text" name="name" placeholder="Name">
     <p><b>Surname</b></p>
