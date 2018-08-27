@@ -37,7 +37,7 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.2.4</version>
-            <type>bundle</type>
+            <!--<type>bundle</type>-->
         </dependency>
 
         <!-- CODE GENERATION (Lombok) -->
