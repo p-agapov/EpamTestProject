@@ -26,4 +26,9 @@ public class Customer {
     public Customer(String name, String surname, boolean isVIP, int userId) {
         this(0, name, surname, isVIP, userId);
     }
+
+    public Customer(int id) {
+        this.customerId = id;
+    }
+
 }
