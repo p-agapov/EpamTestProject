@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form action="/tours" method="get">
+<form action="tours" method="get">
     <input type="hidden" name="level" value="nobody"/>
     <input type="hidden" name="method" value="getAll"/>
     <input type="submit" value="Begin">
