@@ -2,13 +2,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Index</title>
+    <title>Frontpage</title>
 </head>
 <body>
 
-
 <%
-    String redirectURL = "tours?method=getAll&level=nobody";
+    String redirectURL = "/showToursNobody.jsp";
     response.sendRedirect(redirectURL);
 %>
 

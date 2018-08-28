@@ -31,6 +31,12 @@ public class UserDaoImpl implements UserDao {
     private static final String PASS_FIELD = "password";
     private static final String ROLE_FIELD = "role";
 
+//    @SneakyThrows
+//    public boolean ifUserExist(String) {
+//
+//        return false;
+//    }
+
     @SneakyThrows
     public User insertUser(@NonNull User u) {
         @Cleanup val connection = ConnectionPool.getConnection();
