@@ -18,14 +18,16 @@ Visitors can register, list and buy tours. System has a Manager role for handlin
 + Tours
 + Orders
 
-# Technical stack
+# Technological Stack
 + Language - Java 8
 + DB - PostgreSQL
 + Test framework - JUnit 5
 + Build tool - Maven
 + Code coverage tool - Jacoco
-+ Logging tool - Log4j2
-+ Annotation processor - Lombok
++ Annotation processor & code generatation - Lombok
++ CI tool - Jenkins
++ Deployment - Docker
++ Version comtrol - Git/Gitlab
 
 # DB Schema
 ![alt text](docs/DB Schema.png)
@@ -34,3 +36,11 @@ Visitors can register, list and buy tours. System has a Manager role for handlin
 
 # Access Matrix
 ![alt text](docs/access_matrix.png)
+
+# Local Deployment Instruction
+1. Install Intellij Idea Ultimate
+2. Install Tomcat 9.0.X
+3. Checkout project into Idea from https://Roman_Samotoshenkov@git.epam.com/Mikhail_Sosnin/180813-studentproject.git
+4. Set configuration for Tomcat with Edit Configurations in Idea (choose port and Tomcat folder)
+5. Add Deployment Artifacts on the next tab of configurator
+6. Run configuration
