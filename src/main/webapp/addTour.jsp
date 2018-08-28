@@ -10,7 +10,7 @@
     <input required type="text" name="name" placeholder="Name">
     <input required type="number" name="price" placeholder="Price">
     <input type="checkbox" name="hot" placeholder="Hot">
-    <input required type="number" name="discount" placeholder="Price">
+    <input required type="number" name="discount" placeholder="Discount">
     <input type="submit" value="Save">
 </form>
 </body>

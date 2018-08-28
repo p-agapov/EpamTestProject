@@ -29,6 +29,14 @@
     <input type="submit" value="Sort by discount">
 </form>
 
+<form action="tours" method="get">
+    <input type="hidden" name="method" value="getFilteredByPrice">
+    <input type="hidden" name="level" value="nobody"/>
+    <input required type="number" name="lower_bound" placeholder="Lower bound">
+    <input required type="number" name="higher_bound" placeholder="Higher bound">
+    <input type="submit" value="Filter">
+</form>
+
 <table border="2">
     <tr>
         <td>ID</td>

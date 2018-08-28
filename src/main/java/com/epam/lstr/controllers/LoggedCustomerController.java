@@ -42,6 +42,9 @@ public class LoggedCustomerController extends HttpServlet {
             case "getSortedByDiscount":
                 getSortedByDiscount(req, resp);
                 break;
+            case "getFilteredByPrice":
+                getFilteredByPrice(req, resp);
+                break;
             case "getOrders":
                 getOrders(req, resp);
                 break;
@@ -89,6 +92,21 @@ public class LoggedCustomerController extends HttpServlet {
 
         getInternal(req, resp);
     }
+
+    private void getFilteredByPrice(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+
+        int higherBound = Integer.parseInt(req.getParameter("higher_bound"));
+        int lowerBound = Integer.parseInt(req.getParameter("lower_bound"));
+
+
+        List<Tour> tours = getFiltered(lowerBound, higherBound);
+
+        req.setAttribute("tours", tours);
+
+        getInternal(req, resp);
+    }
+
+
 
     private void getOrders(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
@@ -174,5 +192,12 @@ public class LoggedCustomerController extends HttpServlet {
                 .collect(Collectors.toList());
     }
 
+    private List<Tour> getFiltered(int lowerBound, int higherBound) {
+        return tourService
+                .getAll()
+                .stream()
+                .filter(tour -> tour.getPrice() > lowerBound && tour.getPrice() < higherBound)
+                .collect(Collectors.toList());
+    }
 
 }
