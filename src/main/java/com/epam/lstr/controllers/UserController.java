@@ -47,6 +47,9 @@ public class UserController extends HttpServlet {
             case "add":
                 add(req, resp);
                 break;
+            case "addCustomer":
+                addCustomer(req, resp);
+                break;
             case "set":
                 set(req, resp);
                 break;
@@ -104,17 +107,32 @@ public class UserController extends HttpServlet {
     private void add(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
         String login = req.getParameter(LOG);
-        String password = req.getParameter(PAS);
+        String password = GET_HASHED.apply(req.getParameter(PAS));
         String role = req.getParameter("role");
         User user = new User(login, password, role);
         userService.add(user);
-        getAll(req, resp);
+
+        req.setAttribute("user_id", user.getId());
+        RequestDispatcher dispatcher = req.getRequestDispatcher("addCustomerForUser.jsp");
+        dispatcher.forward(req, resp);
     }
+
+    private void addCustomer(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+
+        String name = req.getParameter("name");
+        String surname = req.getParameter("surname");
+        boolean isVip = req.getParameter("vip") != null;
+        int userId = Integer.parseInt(req.getParameter("user_id"));
+        resp.sendRedirect(String.format("customers?method=add&name=%s&surname=%s&vip=%s&userid=%d&redirect=yes",
+                name, surname, isVip, userId));
+    }
+
+
 
     private void set(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         int id = Integer.parseInt(req.getParameter("id"));
         String login = req.getParameter(LOG);
-        String password = req.getParameter(PAS);
+        String password = GET_HASHED.apply(req.getParameter(PAS));
         String role = req.getParameter("role");
         User user = new User(id, login, password, role);
         boolean set = userService.set(user);

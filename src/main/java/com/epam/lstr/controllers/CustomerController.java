@@ -66,12 +66,15 @@ public class CustomerController extends HttpServlet {
         String surname = req.getParameter("surname");
         boolean isVip = req.getParameter("vip") != null;
         int userId = Integer.parseInt(req.getParameter("userid"));
+        boolean redirectToUserController = req.getParameter("redirect") != null;
 
         Customer customer = new Customer(name, surname, isVip, userId);
 
         service.add(customer);
-
-        getAll(req, resp);
+        if (redirectToUserController)
+            resp.sendRedirect("users?method=getAll");
+        else
+            getAll(req, resp);
     }
 
 

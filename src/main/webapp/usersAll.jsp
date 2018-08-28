@@ -23,20 +23,17 @@
     <tr>
         <td>ID</td>
         <td>Login</td>
-        <td>assword</td>
         <td>Role</td>
     </tr>
     <tr>
         <td>${defUser.getId()}</td>
         <td>${defUser.getLogin()}</td>
-        <td>${defuser.getPassword()}</td>
         <td>${defUser.getRole()}</td>
     </tr>
     <c:forEach items="${users}" var="user">
         <tr>
             <td>${user.getId()}</td>
             <td><c:out value="${user.getLogin()}" default="no"/></td>
-            <td>${user.getPassword()}</td>
             <td>${user.getRole()}</td>
             <td>
                 <form action="updateUser.jsp" method="post">

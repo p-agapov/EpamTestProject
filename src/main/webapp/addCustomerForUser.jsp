@@ -6,17 +6,16 @@
 <body>
 <H3>Adding new Customer</H3>
 Please fill in form below.
-<form action="customers" method="post">
-    <input type="hidden" name="method" value="add"/>
+<form action="users" method="post">
+    <input type="hidden" name="method" value="addCustomer"/>
     <input type="hidden" name="level" value="manager"/>
+    <input type="hidden" name="user_id" value="${user_id}"/>
     <p><b>Name</b></p>
     <input required type="text" name="name" placeholder="Name">
     <p><b>Surname</b></p>
     <input required type="text" name="surname" placeholder="Surname">
     <p><b>Status (VIP or not)</b></p>
     <input type="checkbox" name="vip" placeholder="vip">
-    <p><b>UserID (from users table)</b></p>
-    <input required type="number" name="userid" placeholder="User ID">
     <input type="submit" value="Save">
 </form>
 </body>
