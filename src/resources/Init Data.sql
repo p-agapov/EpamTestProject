@@ -17,26 +17,26 @@ INSERT INTO users (login, password, role)
 VALUES ('user5', '5a39bead318f306939acb1d016647be2e38c6501c58367fdb3e9f52542aa2442', 'customer');
 
 INSERT INTO customers (name, surname, vip, user_id)
-VALUES ('Kirill', 'Velosipedov', true, 2);
+VALUES ('Darth', 'Vader', true, 2);
 INSERT INTO customers (name, surname, vip, user_id)
-VALUES ('Dunya', 'Velosipedova', true, 3);
+VALUES ('Luke', 'Skywalker', true, 3);
 INSERT INTO customers (name, surname, vip, user_id)
-VALUES ('Ivan', 'Dulin', true, 4);
+VALUES ('Master', 'Yoda', true, 4);
 INSERT INTO customers (name, surname, vip, user_id)
-VALUES ('Steve', 'Smith', true, 5);
+VALUES ('Leia', 'Organa', true, 5);
 INSERT INTO customers (name, surname, vip, user_id)
-VALUES ('Apu', 'Nahasapeemapetilon', true, 6);
+VALUES ('Hun', 'Solo', true, 6);
 
 INSERT INTO tours (name, price, hot, discount)
-VALUES ('Tour1', 30000, true, 10);
+VALUES ('Alderaan', 30000, true, 10);
 INSERT INTO tours (name, price, hot, discount)
-VALUES ('Tour2', 60000, true, 20);
+VALUES ('Hoth', 60000, true, 20);
 INSERT INTO tours (name, price, hot, discount)
-VALUES ('Tour3', 100000, false , 0);
+VALUES ('Jakku', 100000, false , 0);
 INSERT INTO tours (name, price, hot, discount)
-VALUES ('Tour4', 150000, false , 0);
+VALUES ('Dagobah', 150000, false , 0);
 INSERT INTO tours (name, price, hot, discount)
-VALUES ('Tour5', 250000, false , 0);
+VALUES ('Coruscant', 250000, false , 0);
 
 INSERT INTO orders (customer_id, tour_id, paid)
 VALUES (1, 3, true);

@@ -39,13 +39,6 @@
         .line {
             padding: 30px;
         }
-
-        /*tr:hover {background-color:#c5c5c5;}*/
-        /*th, td {*/
-        /*padding: 8px;*/
-        /*text-align: left;*/
-        /*border-bottom: 1px solid #ddd;*/
-        /*}*/
     </style>
 </head>
 <body>
@@ -69,8 +62,8 @@
             <input type="submit" class="btn-primary form-control" value="Sort by discount">
         </form>
 
-        <H3>You:</H3>
-        <c:out value="${customer.getName()} ${customer.getSurname()}"/>
+        <H5>Sign as:
+        <c:out value="${customer.getName()} ${customer.getSurname()}"/></H5>
     </div>
 </div>
 <div class="col-md-10">
@@ -94,7 +87,7 @@
                     <form action="logged" method="post">
                         <input type="hidden" name="method" value="buy">
                         <input type="hidden" name="tour_id" value="${tour.getTourId()}">
-                        <input type="submit" value="Order and pay" style="float:left">
+                        <input type="submit" class="btn-primary form-control" value="Order and pay" style="float:left">
                     </form>
                 </td>
             </tr>
