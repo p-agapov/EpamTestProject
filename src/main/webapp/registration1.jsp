@@ -25,7 +25,7 @@
 <div class="container">
     <div class="col-xs-30 col-sm-8 col-md-4 col-lg-4 col-centered">
         <div class="jumbotron">
-            <h3>Please login</h3>
+            <h3>Fill in:</h3>
             <form action="users" method="post">
                 <div class="form-group">
                     <input type="text" name="login" class="form-control" placeholder="Enter Username" required>
@@ -39,27 +39,5 @@
             </form>
         </div>
     </div>
-
 </div>
 </body>
-<%--<html>--%>
-<%--<head>--%>
-    <%--<title>Registration</title>--%>
-<%--</head>--%>
-<%--<body>--%>
-
-<%--Hello, Welcome! <br>--%>
-
-<%--Please, fill the fields below: <br>--%>
-<%--<form action="users" method="post">--%>
-    <%--Login<br>--%>
-    <%--<input type="text" name="login" maxlength="20" required> <br>--%>
-    <%--Password:<br>--%>
-    <%--<input type="password" name="password" maxlength="20" required> <br>--%>
-    <%--<input type="hidden" name="role" value="customer"/>--%>
-    <%--<input type="hidden" name="method" value="register"/> <br>--%>
-    <%--<input type="submit" value="Next">--%>
-<%--</form>--%>
-
-<%--</body>--%>
-<%--</html>--%>
