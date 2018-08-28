@@ -1,5 +1,6 @@
 package com.epam.lstr.dao.impl;
 
+import com.epam.lstr.dao.ConnectionPool;
 import com.epam.lstr.dao.OrderDao;
 import com.epam.lstr.model.Order;
 import org.junit.jupiter.api.BeforeAll;
@@ -27,6 +28,7 @@ public class OrderDaoImplTest {
     static void init() {
         orderDao = new OrderDaoImpl();
         order = randomOrder();
+        ConnectionPool.setTestDB();
     }
 
 

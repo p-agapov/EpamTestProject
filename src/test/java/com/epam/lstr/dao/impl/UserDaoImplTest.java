@@ -1,6 +1,8 @@
 package com.epam.lstr.dao.impl;
 
+import com.epam.lstr.dao.ConnectionPool;
 import com.epam.lstr.model.User;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +19,11 @@ class UserDaoImplTest {
 
 
     private User vasya = userDao.insertUser(new User(1, LOG, "admin", ROLE));
+
+    @BeforeAll
+    static void init() {
+        ConnectionPool.setTestDB();
+    }
 
     @Test
     @DisplayName("InsertUser method works correctly")

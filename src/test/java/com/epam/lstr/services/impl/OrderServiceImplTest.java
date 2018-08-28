@@ -1,5 +1,6 @@
 package com.epam.lstr.services.impl;
 
+import com.epam.lstr.dao.ConnectionPool;
 import com.epam.lstr.model.Order;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,7 @@ class OrderServiceImplTest {
     private static void init() {
         service = new OrderServiceImpl();
         order = randomOrder();
+        ConnectionPool.setTestDB();
     }
 
 

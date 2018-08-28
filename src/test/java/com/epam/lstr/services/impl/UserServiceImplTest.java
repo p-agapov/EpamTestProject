@@ -1,10 +1,14 @@
 package com.epam.lstr.services.impl;
 
+import com.epam.lstr.dao.ConnectionPool;
 import com.epam.lstr.model.User;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import java.util.List;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -15,6 +19,11 @@ class UserServiceImplTest {
     private static final String ROLE = "manager";
 
     private User vasya = new User(LOG, "admin", ROLE);
+
+    @BeforeAll
+    static void init() {
+        ConnectionPool.setTestDB();
+    }
 
     @Test
     @DisplayName("Test Service Add works")

@@ -1,5 +1,6 @@
 package com.epam.lstr.services.impl;
 
+import com.epam.lstr.dao.ConnectionPool;
 import com.epam.lstr.model.Tour;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,7 @@ class TourServiceImplTest {
     private static void init() {
         service = new TourServiceImpl();
         tour = randomTour();
+        ConnectionPool.setTestDB();
     }
 
 

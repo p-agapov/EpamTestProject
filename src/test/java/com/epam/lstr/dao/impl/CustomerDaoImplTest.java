@@ -1,9 +1,11 @@
 package com.epam.lstr.dao.impl;
 
+import com.epam.lstr.dao.ConnectionPool;
 import com.epam.lstr.dao.CustomerDao;
 import com.epam.lstr.model.Customer;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -30,6 +32,11 @@ public class CustomerDaoImplTest {
                 CUSTOMER_VIP,
                 CUSTOMER_USER_ID
         );
+    }
+
+    @BeforeAll
+    static void init() {
+        ConnectionPool.setTestDB();
     }
 
     @Test

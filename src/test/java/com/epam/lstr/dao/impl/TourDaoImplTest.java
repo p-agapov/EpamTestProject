@@ -1,5 +1,6 @@
 package com.epam.lstr.dao.impl;
 
+import com.epam.lstr.dao.ConnectionPool;
 import com.epam.lstr.dao.TourDao;
 import com.epam.lstr.model.Tour;
 import org.junit.jupiter.api.BeforeAll;
@@ -27,6 +28,7 @@ public class TourDaoImplTest {
     static void init() {
         tourDao = new TourDaoImpl();
         tour = randomTour();
+        ConnectionPool.setTestDB();
     }
 
     @Test
