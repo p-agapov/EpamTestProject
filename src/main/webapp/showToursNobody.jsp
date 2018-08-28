@@ -70,14 +70,6 @@
             <input type="hidden" name="method" value="getSortedByDiscount">
             <input type="submit" class="btn-primary form-control" value="Sort by discount">
         </form>
-        <br>
-        <form action="tours" method="get">
-            <input type="hidden" name="method" value="getFilteredByPrice">
-            <input type="hidden" name="level" value="nobody"/>
-            <input required type="number" class="form-control" name="lower_bound" placeholder="Lower bound">
-            <input required type="number" class="form-control" name="higher_bound" placeholder="Higher bound">
-            <input type="submit" class="btn-primary form-control" value="Filter">
-        </form>
     </div>
 </div>
 
