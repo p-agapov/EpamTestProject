@@ -6,6 +6,11 @@
 </head>
 <body>
 
+
+<form action="managerFrontPage.jsp" method="get">
+    <input type="submit" value="Back">
+</form>
+
 <form action="addCustomer.jsp">
     <input type="submit" value="Add new customer">
 </form>

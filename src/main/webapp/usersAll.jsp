@@ -13,6 +13,10 @@
 </head>
 <body>
 
+<form action="managerFrontPage.jsp" method="get">
+    <input type="submit" value="Back">
+</form>
+
 <form action="users" method="get">
     <input type="hidden" name="method" value="get"/>
     Enter ID to find user:

@@ -10,6 +10,11 @@
     <input type="submit" value="Add new tour">
 </form>
 
+<form action="managerFrontPage.jsp" method="get">
+    <input type="submit" value="Back">
+</form>
+
+
 <form action="tours" method="post">
     <input type="hidden" name="level" value="manager"/>
     <input type="hidden" name="method" value="deleteAll">

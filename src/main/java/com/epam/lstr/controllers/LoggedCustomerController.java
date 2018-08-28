@@ -68,24 +68,8 @@ public class LoggedCustomerController extends HttpServlet {
         List<Tour> tours = (List<Tour>) tourService.getAll();
         req.setAttribute("tours", tours);
 
-        Object idRaw = req.getSession().getAttribute("customer_id");
-        int id;
-        if (idRaw == null) {
-            req.getSession().setAttribute("customer_id",
-                    customerService.getByUserId(Integer.parseInt(req.getParameter("user_id")))
-                            .getCustomerId());
-            idRaw = req.getSession().getAttribute("customer_id");
-        }
+        getInternal(req, resp);
 
-        id = (Integer) idRaw;
-
-        Customer customer = customerService.get(id);
-        req.setAttribute("customer", customer);
-
-
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/showToursCustomer.jsp");
-
-        dispatcher.forward(req, resp);
     }
 
     private void getSortedByPrice(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -93,9 +77,8 @@ public class LoggedCustomerController extends HttpServlet {
         List<Tour> tours = getSorted(Comparator.comparing(Tour::getPrice));
 
         req.setAttribute("tours", tours);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/showToursCustomer.jsp");
 
-        dispatcher.forward(req, resp);
+        getInternal(req, resp);
     }
 
     private void getSortedByDiscount(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -103,9 +86,8 @@ public class LoggedCustomerController extends HttpServlet {
         List<Tour> tours = getSorted(Comparator.comparing(Tour::getDiscount).reversed());
 
         req.setAttribute("tours", tours);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/showToursCustomer.jsp");
 
-        dispatcher.forward(req, resp);
+        getInternal(req, resp);
     }
 
     private void getOrders(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -160,6 +142,29 @@ public class LoggedCustomerController extends HttpServlet {
 
         getOrders(req, resp);
     }
+
+    private void getInternal(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        Object idRaw = req.getSession().getAttribute("customer_id");
+        int id;
+        if (idRaw == null) {
+            req.getSession().setAttribute("customer_id",
+                    customerService.getByUserId(Integer.parseInt(req.getParameter("user_id")))
+                            .getCustomerId());
+            idRaw = req.getSession().getAttribute("customer_id");
+        }
+
+        id = (Integer) idRaw;
+
+        Customer customer = customerService.get(id);
+        req.setAttribute("customer", customer);
+
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/showToursCustomer.jsp");
+
+        dispatcher.forward(req, resp);
+    }
+
+
 
     private List<Tour> getSorted(Comparator<Tour> comparator) {
         return tourService
