@@ -43,11 +43,7 @@ public class ConnectionPool {
 
     @SneakyThrows
     public static void setTestDB() {
-        try {
-            Class.forName(H2_DRIVER).newInstance();
-        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        Class.forName(H2_DRIVER).newInstance();
         config.setJdbcUrl(H2_URL);
         config.setUsername("");
         config.setPassword("");
