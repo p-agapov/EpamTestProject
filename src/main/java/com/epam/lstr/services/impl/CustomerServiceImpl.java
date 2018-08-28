@@ -48,6 +48,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public Customer getByUserId(int id) {
+        return dao.getCustomerByUserId(id);
+    }
+
+    @Override
     public Collection<Customer> getAll() {
         return dao.getAllCustomers();
     }

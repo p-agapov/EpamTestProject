@@ -20,6 +20,8 @@ public interface CustomerService {
 
     Customer get(int id);
 
+    Customer getByUserId(int id);
+
     Collection<Customer> getAll();
 
     CustomerService deleteAll();

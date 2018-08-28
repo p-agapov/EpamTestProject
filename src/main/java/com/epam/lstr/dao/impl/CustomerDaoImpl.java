@@ -29,6 +29,7 @@ public class CustomerDaoImpl implements CustomerDao {
     static final String UPDATE_SQL = "UPDATE customers SET name = ?, surname = ?, VIP = ?, user_id = ? WHERE customer_id = ?";
     static final String DELETE_SQL = "DELETE FROM customers WHERE customer_id = ?";
     static final String GET_SQL = "SELECT customer_id, name, surname, VIP, user_id FROM customers WHERE customer_id = ?";
+    static final String GET_BY_USER_ID_SQL = "SELECT customer_id, name, surname, VIP, user_id FROM customers WHERE user_id = ?";
     static final String GET_ALL_SQL = "SELECT customer_id, name, surname, VIP, user_id FROM customers";
     static final String DELETE_ALL_SQL = "DELETE FROM customers";
     static final String COUNT_SQL = "SELECT COUNT(customer_id) FROM customers";
@@ -92,22 +93,13 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @SneakyThrows
     public Customer getCustomerById(int id) {
-        @Cleanup val connection = connector.getConnection();
-        @Cleanup val preparedStatement = connection.prepareStatement(GET_SQL);
+        return getById(id, GET_SQL);
+    }
 
-        preparedStatement.setInt(1, id);
-
-        @Cleanup val resultSet = preparedStatement.executeQuery();
-
-        if (resultSet.next())
-            return new Customer(
-                    resultSet.getInt(CUSTOMER_ID_FIELD),
-                    resultSet.getString(NAME_FIELD),
-                    resultSet.getString(SURNAME_FIELD),
-                    resultSet.getBoolean(VIP_FIELD),
-                    resultSet.getInt(USER_ID_FIELD));
-
-        return null;
+    @SneakyThrows
+    @Override
+    public Customer getCustomerByUserId(int id) {
+        return getById(id, GET_BY_USER_ID_SQL);
     }
 
     @NonNull
@@ -147,4 +139,26 @@ public class CustomerDaoImpl implements CustomerDao {
         @Cleanup val resultSet = statement.executeQuery(COUNT_SQL);
         return resultSet.next() ? resultSet.getInt(1) : 0;
     }
+
+    @SneakyThrows
+    private Customer getById(int id, String query) {
+
+        @Cleanup val connection = connector.getConnection();
+        @Cleanup val preparedStatement = connection.prepareStatement(query);
+
+        preparedStatement.setInt(1, id);
+
+        @Cleanup val resultSet = preparedStatement.executeQuery();
+
+        if (resultSet.next())
+            return new Customer(
+                    resultSet.getInt(CUSTOMER_ID_FIELD),
+                    resultSet.getString(NAME_FIELD),
+                    resultSet.getString(SURNAME_FIELD),
+                    resultSet.getBoolean(VIP_FIELD),
+                    resultSet.getInt(USER_ID_FIELD));
+
+        return null;
+    }
+
 }

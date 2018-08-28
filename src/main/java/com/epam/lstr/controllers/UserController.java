@@ -163,11 +163,14 @@ public class UserController extends HttpServlet {
             req.setAttribute("wrong", WRONG_LOGIN_MESSAGE);
         } else {
             if (user.getRole().equals("manager"))
-                redirect = "/showToursManager.jsp";
-            else redirect = "/showToursCustomer.jsp";
+                resp.sendRedirect("/managerFrontPage.jsp");
+//                redirect = "/showToursManager.jsp";
+            else
+                resp.sendRedirect("logged?method=get&user_id=" + user.getId());
+//                redirect = "/showToursCustomer.jsp";
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher(redirect);
-            dispatcher.forward(req, resp);
+//            RequestDispatcher dispatcher = req.getRequestDispatcher(redirect);
+//            dispatcher.forward(req, resp);
         }
     }
 

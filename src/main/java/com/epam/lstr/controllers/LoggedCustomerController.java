@@ -68,7 +68,17 @@ public class LoggedCustomerController extends HttpServlet {
         List<Tour> tours = (List<Tour>) tourService.getAll();
         req.setAttribute("tours", tours);
 
-        int id = (Integer) req.getSession().getAttribute("customer_id");
+        Object idRaw = req.getSession().getAttribute("customer_id");
+        int id;
+        if (idRaw == null) {
+            req.getSession().setAttribute("customer_id",
+                    customerService.getByUserId(Integer.parseInt(req.getParameter("user_id")))
+                            .getCustomerId());
+            idRaw = req.getSession().getAttribute("customer_id");
+        }
+
+        id = (Integer) idRaw;
+
         Customer customer = customerService.get(id);
         req.setAttribute("customer", customer);
 
@@ -102,8 +112,15 @@ public class LoggedCustomerController extends HttpServlet {
 
         List<Order> orders = (List<Order>) ordersService.getByCustId((Integer)
                 req.getSession()
-                        .getAttribute("customer_id"));
-        req.setAttribute("orders", orders);
+                        .getAttribute("customer_id")
+        );
+
+
+        List<Tour> tours = orders.stream()
+                .map(order -> tourService.get(order.getTourId()))
+                .collect(Collectors.toList());
+
+        req.setAttribute("tours", tours);
 
         int id = (Integer) req.getSession().getAttribute("customer_id");
         Customer customer = customerService.get(id);

@@ -18,6 +18,8 @@ public interface CustomerDao {
     CustomerDao delete(Customer customer);
 
     Customer getCustomerById(int id);
+
+    Customer getCustomerByUserId(int id);
     List<Customer> getAllCustomers();
 
     CustomerDao clear();
