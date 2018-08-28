@@ -1,60 +1,99 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Tours list</title>
+    <title>Unregistered</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+        }
+
+        #customers {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #337AB7;
+            color: white;
+        }
+
+        .line {
+            padding: 30px;
+        }
+    </style>
 </head>
 <body>
 
-<c:out value="${wrongLogin}"/>
-<form action="users" method="post">
-    <input type="hidden" name="method" value="login">
-    <input type="text" name="login" maxlength="20" required>
-    <input type="password" name="password" maxlength="20" required>
-    <input type="submit" value="Login">
-</form>
+<div class="col-md-2">
+    <div class="line">
+        <H5>Sign in or Sign up</H5>
+        <form action="users" method="post">
+            <input type="hidden" name="method" value="login">
+            <br>
+            <input type="text" class="form-control" name="login" maxlength="20" required>
+            <br>
+            <input type="password" class="form-control" name="password" maxlength="20" required>
+            <br><br><br>
+            <input type="submit" class="btn-primary form-control" value="Login">
+        </form>
+        <br>
+        <form action="registration1.jsp">
+            <input type="submit" class="btn-success form-control" value="Register">
+        </form>
+        <br><br><br><br><br><br><br>
+        <form action="tours" method="get">
+            <input type="hidden" name="method" value="getSortedByPrice">
+            <input type="submit" class="btn-primary form-control" value="Sort by price">
+        </form>
+        <br>
+        <form action="tours" method="get">
+            <input type="hidden" name="method" value="getSortedByDiscount">
+            <input type="submit" class="btn-primary form-control" value="Sort by discount">
+        </form>
+    </div>
+</div>
 
-<form action="registration1.jsp">
-    <input type="submit" value="Register">
-</form>
-
-
-<form action="tours" method="get">
-    <input type="hidden" name="method" value="getSortedByPrice">
-    <input type="submit" value="Sort by price">
-</form>
-
-<form action="tours" method="get">
-    <input type="hidden" name="method" value="getSortedByDiscount">
-    <input type="submit" value="Sort by discount">
-</form>
-
-<form action="tours" method="get">
-    <input type="hidden" name="method" value="getFilteredByPrice">
-    <input type="hidden" name="level" value="nobody"/>
-    <input required type="number" name="lower_bound" placeholder="Lower bound">
-    <input required type="number" name="higher_bound" placeholder="Higher bound">
-    <input type="submit" value="Filter">
-</form>
-
-<table border="2">
-    <tr>
-        <td>ID</td>
-        <td>Name</td>
-        <td>Price</td>
-        <td>HOT!!!</td>
-        <td>Discount</td>
-    </tr>
-    <c:forEach items="${tours}" var="tour">
-        <tr>
-            <td>${tour.getTourId()}</td>
-            <td>${tour.getName()}</td>
-            <td>${tour.getPrice()}</td>
-            <td>${tour.isHot()}</td>
-            <td>${tour.getDiscount()}</td>
-        </tr>
-    </c:forEach>
-</table>
-
+<div class="col-md-10">
+    <div align="center">
+        <table border="2" width="80%" align="center" id="customers">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>HOT!!!</th>
+                <th>Discount</th>
+            </tr>
+            <c:forEach items="${tours}" var="tour">
+                <tr>
+                    <td>${tour.getTourId()}</td>
+                    <td>${tour.getName()}</td>
+                    <td>${tour.getPrice()}</td>
+                    <td>${tour.isHot()}</td>
+                    <td>${tour.getDiscount()}</td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+</div>
 </body>
 </html>
