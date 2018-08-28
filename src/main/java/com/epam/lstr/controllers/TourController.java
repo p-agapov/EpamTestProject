@@ -195,11 +195,11 @@ public class TourController extends HttpServlet {
     private RequestDispatcher decideAccess(HttpServletRequest req, String level) {
         RequestDispatcher dispatcher;
         if ("manager".equals(level))
-            dispatcher = req.getRequestDispatcher("/showToursManager.jsp");
+            dispatcher = req.getRequestDispatcher("showToursManager.jsp");
         else if ("customer".equals(level))
-            dispatcher = req.getRequestDispatcher("/showToursCustomer.jsp");
+            dispatcher = req.getRequestDispatcher("showToursCustomer.jsp");
         else
-            dispatcher = req.getRequestDispatcher("/showToursNobody.jsp");
+            dispatcher = req.getRequestDispatcher("showToursNobody.jsp");
         return dispatcher;
     }
 }

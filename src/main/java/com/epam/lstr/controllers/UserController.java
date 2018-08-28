@@ -77,7 +77,7 @@ public class UserController extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         User user = userService.get(id);
         req.setAttribute("user", user);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/userSearch.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("userSearch.jsp");
         dispatcher.forward(req, resp);
     }
 
@@ -89,7 +89,7 @@ public class UserController extends HttpServlet {
             User defUser = new User(no, no, no);
             req.setAttribute("defUser", defUser);
         }
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/usersAll.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("usersAll.jsp");
         dispatcher.forward(req, resp);
     }
 
@@ -97,7 +97,7 @@ public class UserController extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         String userRole = userService.getUserRole(id);
         req.setAttribute("userRole", userRole);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
         dispatcher.forward(req, resp);
     }
 
@@ -122,7 +122,7 @@ public class UserController extends HttpServlet {
         if (set) {
             req.setAttribute("yes", yes);
         }
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/updateUser.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("updateUser.jsp");
         dispatcher.forward(req, resp);
 
     }
@@ -152,7 +152,7 @@ public class UserController extends HttpServlet {
         User user = new User(login, password, role);
         userService.add(user);
         req.setAttribute("userId", user.getId());
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/registration2.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("registration2.jsp");
         dispatcher.forward(req, resp);
     }
 
@@ -166,7 +166,7 @@ public class UserController extends HttpServlet {
             resp.sendRedirect("tours?method=getAll&level=nobody&login=wrong");
         } else {
             if (user.getRole().equals("manager"))
-                resp.sendRedirect("/managerFrontPage.jsp");
+                resp.sendRedirect("managerFrontPage.jsp");
             else
                 resp.sendRedirect("logged?method=get&user_id=" + user.getId());
 
@@ -175,7 +175,7 @@ public class UserController extends HttpServlet {
 
     private void logout(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
         dispatcher.forward(req, resp);
     }
 

@@ -65,7 +65,7 @@ public class OrderController extends HttpServlet {
     private void getAll(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         List<Order> orders = (List<Order>) service.getAll();
         req.setAttribute("orders", orders);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/showToursManager.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("showToursManager.jsp");
         dispatcher.forward(req, resp);
     }
 
@@ -73,7 +73,7 @@ public class OrderController extends HttpServlet {
         int customerId = Integer.parseInt(req.getParameter("custId"));
         List<Order> orders = (List<Order>) service.getByCustId(customerId);
         req.setAttribute("orders", orders);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/showToursManager.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("showToursManager.jsp");
         dispatcher.forward(req, resp);
     }
 

@@ -55,7 +55,7 @@ public class CustomerController extends HttpServlet {
 
         List<Customer> customers = (List<Customer>) service.getAll();
         req.setAttribute("customers", customers);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/showCustomersManager.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("showCustomersManager.jsp");
         dispatcher.forward(req, resp);
     }
 
