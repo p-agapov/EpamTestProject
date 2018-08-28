@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>Add new tour</title>
-    <title>Tours list</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
     <style>
         body {
@@ -23,7 +22,9 @@
             <br>
             <input required type="number" class="form-control" name="price" placeholder="Price">
             <br>
-            <input type="checkbox" name="hot" placeholder="Hot">
+            <p>Hot:
+            <input type="checkbox" name="hot" placeholder="Hot" align="center">
+            </p>
             <br>
             <input required type="number"class="form-control" name="discount" placeholder="Discount">
             <br>

@@ -59,11 +59,11 @@
             <input type="hidden" name="method" value="getSortedByDiscount">
             <input type="submit" class="btn-primary form-control" value="Sort by discount">
         </form>
-        <H3>You:</H3>
-        <c:out value="${customer.getName()} ${customer.getSurname()}"/>
+        <H5>You:
+        <c:out value="${customer.getName()} ${customer.getSurname()}"/></H5>
     </div>
 </div>
-<div class="col-md-10">
+<div class="col-md-1">
     <table border="2" width="80%" align="center" id="customers">
         <tr>
             <th>Name</th>

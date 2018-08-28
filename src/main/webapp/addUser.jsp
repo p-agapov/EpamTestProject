@@ -2,24 +2,34 @@
 <html>
 <head>
     <title>Add User</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+        }
+
+        .line {
+            padding: 30px;
+        }
+    </style>
 </head>
 <body>
-
-<form action="users" method="post">
-    Fill the fields:<br>
-    Login<br>
-    <input type="text" name="login" maxlength="20" required> <br>
-    Password:<br>
-    <input type="password" name="password" maxlength="20" required> <br>
-    <br>
-    <select name="role" required>
-        <option>customer</option>
-        <option>manager</option>
-    </select>
-    <input type="hidden" name="method" value="add"/>
-    <br>
-    <input type="submit">
-</form>
-
+<div class="col-md-2">
+    <div class="line">
+        <form action="users" method="post">
+            <input type="text" class="form-control" name="login" maxlength="20" required placeholder="Login">
+            <br>
+            <input type="password" class="form-control"  name="password" maxlength="20" required placeholder="Password">
+            <br>
+            <select name="role" class="form-control"  required>
+                <option>customer</option>
+                <option>manager</option>
+            </select>
+            <input type="hidden" name="method" value="add"/>
+            <br>
+            <input type="submit" class="btn-success form-control">
+        </form>
+    </div>
+</div>
 </body>
 </html>

@@ -50,10 +50,10 @@
         <form action="users" method="post">
             <input type="hidden" name="method" value="login">
             <br>
-            <input type="text" class="form-control" name="login" maxlength="20" required>
+            <input type="text" class="form-control" name="login" maxlength="20" required placeholder="Login">
             <br>
-            <input type="password" class="form-control" name="password" maxlength="20" required>
-            <br><br><br>
+            <input type="password" class="form-control" name="password" maxlength="20" required placeholder="Password">
+            <br>
             <input type="submit" class="btn-primary form-control" value="Login">
         </form>
         <br>

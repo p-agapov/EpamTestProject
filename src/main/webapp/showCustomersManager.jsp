@@ -48,10 +48,6 @@
             <input type="submit" class="btn-primary form-control" value="Back">
         </form>
 
-        <form action="addCustomer.jsp">
-            <input type="submit" class="btn-success form-control" value="New customer">
-        </form>
-
         <form action="customers" method="post">
             <input type="hidden" name="method" value="deleteAll">
             <input type="submit" class="btn-danger form-control" value="Delete all">
