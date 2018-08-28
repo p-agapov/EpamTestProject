@@ -10,6 +10,12 @@
 You:
 <c:out value="${customer.getName()} ${customer.getSurname()}"/>
 
+<form action="users" method="post">
+    <input type="hidden" name="level" value="customer"/>
+    <input type="hidden" name="method" value="logout"/>
+    <input type="submit" value="Logout">
+</form>
+
 
 <form action="logged" method="get">
     <input type="hidden" name="method" value="getOrders">

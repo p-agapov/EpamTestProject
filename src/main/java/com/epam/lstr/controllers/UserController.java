@@ -59,6 +59,10 @@ public class UserController extends HttpServlet {
             case "login":
                 login(req, resp);
                 break;
+            case "logout":
+                logout(req, resp);
+                break;
+
             case "register":
                 register(req, resp);
                 break;
@@ -168,6 +172,14 @@ public class UserController extends HttpServlet {
 
         }
     }
+
+    private void logout(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
+        dispatcher.forward(req, resp);
+    }
+
+
 
     private Function<String, String> GET_HASHED = string -> Hashing.sha256()
             .hashString(string, StandardCharsets.UTF_8)

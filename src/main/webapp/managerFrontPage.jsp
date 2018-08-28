@@ -7,6 +7,14 @@
 If your're here, you're MASTER.
 Click one of the buttons below, fast!
 
+
+<form action="users" method="post">
+    <input type="hidden" name="level" value="manager"/>
+    <input type="hidden" name="method" value="logout"/>
+    <input type="submit" value="Logout">
+</form>
+
+
 <form action="tours" method="get">
     <input type="hidden" name="level" value="manager"/>
     <input type="hidden" name="method" value="getAll"/>

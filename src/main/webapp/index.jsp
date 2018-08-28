@@ -2,15 +2,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Frontpage</title>
+    <title>Index</title>
 </head>
 <body>
 
-<form action="tours" method="get">
-    <input type="hidden" name="level" value="nobody"/>
-    <input type="hidden" name="method" value="getAll"/>
-    <input type="submit" value="Begin">
-</form>
+
+<%
+    String redirectURL = "tours?method=getAll&level=nobody";
+    response.sendRedirect(redirectURL);
+%>
 
 </body>
 </html>
