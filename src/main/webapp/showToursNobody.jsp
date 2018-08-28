@@ -6,16 +6,18 @@
 </head>
 <body>
 
-<form action="registration1.jsp">
-    <input type="submit" value="Register">
-</form>
-
+<c:out value="${wrongLogin}"/>
 <form action="users" method="post">
     <input type="hidden" name="method" value="login">
     <input type="text" name="login" maxlength="20" required>
     <input type="password" name="password" maxlength="20" required>
     <input type="submit" value="Login">
 </form>
+
+<form action="registration1.jsp">
+    <input type="submit" value="Register">
+</form>
+
 
 <form action="tours" method="get">
     <input type="hidden" name="method" value="getSortedByPrice">

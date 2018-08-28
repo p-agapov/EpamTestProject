@@ -1,6 +1,6 @@
 package com.epam.lstr.dao.impl;
 
-import com.epam.lstr.dao.Connector;
+import com.epam.lstr.dao.ConnectionPool;
 import com.epam.lstr.dao.UserDao;
 import com.epam.lstr.model.User;
 import lombok.Cleanup;
@@ -25,7 +25,6 @@ public class UserDaoImpl implements UserDao {
     private static final String DELETE_ALL_SQL = "delete from users";
     private static final String COUNT_SQL = "select count(user_id) from users";
 
-    private Connector connector = Connector.getConnector();
 
     private static final String ID_FIELD = "user_id";
     private static final String LOGIN_FIELD = "login";
@@ -34,7 +33,7 @@ public class UserDaoImpl implements UserDao {
 
     @SneakyThrows
     public User insertUser(@NonNull User u) {
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val ps = connection.prepareStatement(INSERT_SQL, RETURN_GENERATED_KEYS);
         ps.setString(1, u.getLogin());
         ps.setString(2, u.getPassword());
@@ -54,7 +53,7 @@ public class UserDaoImpl implements UserDao {
         String login = null;
         String password = null;
         String role = null;
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val ps = connection.prepareStatement(FIND_SQL);
         ps.setLong(1, id);
         @Cleanup ResultSet rs = ps.executeQuery();
@@ -71,7 +70,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User findByLogPas(String login, String password) {
 
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val ps = connection.prepareStatement(FIND_BY_LOGIN_PASS_SQL);
         ps.setString(1, login);
         ps.setString(2, password);
@@ -90,7 +89,7 @@ public class UserDaoImpl implements UserDao {
     @SneakyThrows
     public List<User> findAllUsers() {
         List<User> list = new ArrayList<>();
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val ps = connection.prepareStatement(FIND_ALL_SQL);
         @Cleanup ResultSet rs = ps.executeQuery();
         while (rs.next()) {
@@ -102,7 +101,7 @@ public class UserDaoImpl implements UserDao {
 
     @SneakyThrows
     public boolean updateUser(@NonNull User u) {
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val preparedStatement = connection.prepareStatement(UPDATE_SQL);
         preparedStatement.setString(1, u.getLogin());
         preparedStatement.setString(2, u.getPassword());
@@ -115,7 +114,7 @@ public class UserDaoImpl implements UserDao {
     @NonNull
     @SneakyThrows
     public String getUserRole(int id) {
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val ps = connection.prepareStatement(GETROLE_SQL);
         ps.setLong(1, id);
         @Cleanup ResultSet rs = ps.executeQuery();
@@ -128,7 +127,7 @@ public class UserDaoImpl implements UserDao {
 
     @SneakyThrows
     public boolean deleteUser(int id) {
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val preparedStatement = connection.prepareStatement(DELETE_SQL);
         preparedStatement.setLong(1, id);
         int countRows = preparedStatement.executeUpdate();
@@ -137,7 +136,7 @@ public class UserDaoImpl implements UserDao {
 
     @SneakyThrows
     public boolean deleteAllUsers() {
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val preparedStatement = connection.prepareStatement(DELETE_ALL_SQL);
         int countRows = preparedStatement.executeUpdate();
         return countRows > 0;
@@ -145,7 +144,7 @@ public class UserDaoImpl implements UserDao {
 
     @SneakyThrows
     public int countAllUsers() {
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val statement = connection.createStatement();
         @Cleanup val resultSet = statement.executeQuery(COUNT_SQL);
         return resultSet.next() ? resultSet.getInt(1) : 0;

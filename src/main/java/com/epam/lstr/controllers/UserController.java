@@ -20,7 +20,6 @@ public class UserController extends HttpServlet {
     private static UserServiceImpl userService = new UserServiceImpl();
     private static final String LOG = "login";
     private static final String PAS = "password";
-    private static final String WRONG_LOGIN_MESSAGE = "Wrong login or password.";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -160,17 +159,13 @@ public class UserController extends HttpServlet {
         User user = userService.getByLogPas(login, password);
 
         if (user == null) {
-            req.setAttribute("wrong", WRONG_LOGIN_MESSAGE);
+            resp.sendRedirect("tours?method=getAll&level=nobody&login=wrong");
         } else {
             if (user.getRole().equals("manager"))
                 resp.sendRedirect("/managerFrontPage.jsp");
-//                redirect = "/showToursManager.jsp";
             else
                 resp.sendRedirect("logged?method=get&user_id=" + user.getId());
-//                redirect = "/showToursCustomer.jsp";
 
-//            RequestDispatcher dispatcher = req.getRequestDispatcher(redirect);
-//            dispatcher.forward(req, resp);
         }
     }
 

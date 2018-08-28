@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 public class TourController extends HttpServlet {
 
     private final TourService service = new TourServiceImpl();
+    private static final String WRONG_LOGIN_MESSAGE = "Wrong login or password.";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -81,8 +82,12 @@ public class TourController extends HttpServlet {
         List<Tour> tours = (List<Tour>) service.getAll();
 
         req.setAttribute("tours", tours);
-        RequestDispatcher dispatcher = decideAccess(req, level);
 
+        if (req.getParameter("login") != null) {
+            req.setAttribute("wrongLogin", WRONG_LOGIN_MESSAGE);
+        }
+
+        RequestDispatcher dispatcher = decideAccess(req, level);
         dispatcher.forward(req, resp);
     }
 

@@ -1,6 +1,6 @@
 package com.epam.lstr.dao.impl;
 
-import com.epam.lstr.dao.Connector;
+import com.epam.lstr.dao.ConnectionPool;
 import com.epam.lstr.dao.TourDao;
 import com.epam.lstr.model.Tour;
 import lombok.Cleanup;
@@ -14,8 +14,6 @@ import java.util.List;
 import static java.sql.Statement.RETURN_GENERATED_KEYS;
 
 public class TourDaoImpl implements TourDao {
-
-    private Connector connector;
 
     private static final String INSERT_SQL = "INSERT INTO tours (name, price, hot, discount) VALUES (?, ?, ?, ?)";
     private static final String GET_ALL_SQL = "SELECT tour_id, name, price, hot, discount FROM tours";
@@ -31,13 +29,10 @@ public class TourDaoImpl implements TourDao {
     private static final String HOT_FIELD = "hot";
     private static final String DISCOUNT_FIELD = "discount";
 
-    public TourDaoImpl() {
-        connector = Connector.getConnector();
-    }
 
     @SneakyThrows
     public Tour add(@NonNull Tour tour) {
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val ps = connection.prepareStatement(INSERT_SQL, RETURN_GENERATED_KEYS);
 
         ps.setString(1, tour.getName());
@@ -59,7 +54,7 @@ public class TourDaoImpl implements TourDao {
     @SneakyThrows
     public List<Tour> getAll() {
 
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val statement = connection.createStatement();
         @Cleanup val rs = statement.executeQuery(GET_ALL_SQL);
 
@@ -77,7 +72,7 @@ public class TourDaoImpl implements TourDao {
 
     @SneakyThrows
     public Tour getById(int tourId) {
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val ps = connection.prepareStatement(GET_ONE_SQL);
         ps.setInt(1, tourId);
         @Cleanup val rs = ps.executeQuery();
@@ -94,7 +89,7 @@ public class TourDaoImpl implements TourDao {
 
     @SneakyThrows
     public TourDao update(Tour tour) {
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val ps = connection.prepareStatement(UPDATE_SQL, RETURN_GENERATED_KEYS);
 
         ps.setString(1, tour.getName());
@@ -112,7 +107,7 @@ public class TourDaoImpl implements TourDao {
     @SneakyThrows
     public TourDao deleteOne(Tour tour) {
 
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val ps = connection.prepareStatement(DELETE_ONE_SQL);
         ps.setLong(1, tour.getTourId());
         ps.executeLargeUpdate();
@@ -122,7 +117,7 @@ public class TourDaoImpl implements TourDao {
     @SneakyThrows
     public TourDao clear() {
 
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val statement = connection.createStatement();
         statement.execute(DELETE_ALL_SQL);
 
@@ -131,7 +126,7 @@ public class TourDaoImpl implements TourDao {
 
     @SneakyThrows
     public int count() {
-        @Cleanup val connection = connector.getConnection();
+        @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val statement = connection.createStatement();
         @Cleanup val rs = statement.executeQuery(COUNT_SQL);
         return rs.next() ? rs.getInt(1) : 0;
