@@ -62,6 +62,14 @@
             <input type="submit" class="btn-primary form-control" value="Sort by discount">
         </form>
 
+        <form action="logged" method="get">
+            <input type="hidden" name="method" value="getFilteredByPrice">
+            <input type="hidden" name="level" value="customer"/>
+            <input required type="number" class="form-control" name="lower_bound" placeholder="Lower bound">
+            <input required type="number" class="form-control" name="higher_bound" placeholder="Higher bound">
+            <input type="submit" class="btn-primary form-control" value="Filter">
+        </form>
+
         <H5>Sign as:
         <c:out value="${customer.getName()} ${customer.getSurname()}"/></H5>
     </div>

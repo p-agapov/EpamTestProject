@@ -110,7 +110,7 @@ public class TourDaoImpl implements TourDao {
         @Cleanup val connection = ConnectionPool.getConnection();
         @Cleanup val ps = connection.prepareStatement(DELETE_ONE_SQL);
         ps.setLong(1, tour.getTourId());
-        ps.executeLargeUpdate();
+        ps.executeUpdate();
         return this;
     }
 
