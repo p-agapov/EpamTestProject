@@ -46,6 +46,12 @@
 <div class="col-md-2">
     <div class="line">
 
+        <form action="users" method="post">
+            <input type="hidden" name="level" value="customer"/>
+            <input type="hidden" name="method" value="logout"/>
+            <input type="submit" class="btn-primary form-control" value="Logout">
+        </form>
+
         <form action="logged" method="get">
             <input type="hidden" name="method" value="getOrders">
             <input type="submit" class="btn-primary form-control" value="Show my orders">
